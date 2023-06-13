@@ -17,7 +17,9 @@ const Login = () => {
 
   const handleGuestLoginBtn = () =>{
     setloginInput({username : "adarshbalika", password: "adarshBalika123"})
-    loginFunc("adarshbalika", "adarshBalika123")
+    setTimeout(() => {
+      loginFunc("adarshbalika", "adarshBalika123")
+    }, 500);
   }
   return (
     <div className="login-container">
@@ -39,7 +41,7 @@ const Login = () => {
         }))}/>
         <button className="login-btn" onClick={handleLoginBtn}>Login</button>
         <button className="login-btn" onClick={handleGuestLoginBtn}>Login as guest !</button>
-        <p>login for first time? <Link className="link">Sign up Here
+        <p>login for first time? <Link to={"/signup"} className="auth-link" >Sign up Here
         </Link></p>
       </div>
     </div>

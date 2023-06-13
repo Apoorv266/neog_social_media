@@ -10,6 +10,7 @@ const Login = () => {
           alt=""
           srcset=""
           width={"600px"}
+          className="vert-move"
         />
       </div>
       <div className="login-details">
@@ -19,7 +20,7 @@ const Login = () => {
         <input type="password" name="" id="" />
         <button className="login-btn">Login</button>
         <button className="login-btn">Login as guest !</button>
-        <p>login for first time?</p>
+        <p>login for first time? Sign up Here</p>
       </div>
     </div>
   );

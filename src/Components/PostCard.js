@@ -18,7 +18,7 @@ const PostCard = () => {
           </div>
           <div className="post-data">
             <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus qui
+            At vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quid
             </p>
           </div>
         </div>

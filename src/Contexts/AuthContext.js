@@ -39,12 +39,12 @@ const AuthContextWrapper = ({ children }) => {
         }
     }
 
-    const signupFunc  = async (username, password, fullname) =>{
+    const signupFunc = async (username, password, fullname) => {
         try {
             setloader(true)
-            const {data: { encodedToken, createdUser }, status} = await axios.post("api/auth/signup",{
-                username, 
-                password, 
+            const { data: { encodedToken, createdUser }, status } = await axios.post("api/auth/signup", {
+                username,
+                password,
                 fullname
             })
 
@@ -56,26 +56,26 @@ const AuthContextWrapper = ({ children }) => {
                 setTimeout(() => {
                     navigate("/");
                     setloader(false)
-                  }, 1000);
+                }, 1000);
             }
         } catch (error) {
             console.log(error)
         }
     }
 
-    const handleLogout = () =>{
+    const handleLogout = () => {
         setloader(true);
         setuserToken(null);
         setuserData(null);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         setTimeout(() => {
-          setloader(false);
-          navigate("/login")
+            setloader(false);
+            navigate("/login")
         }, 2000);
     }
     return (
-        <authContext.Provider value={{ userToken, loginFunc, userData , handleLogout, loader, signupFunc}}>{children}</authContext.Provider>
+        <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc }}>{children}</authContext.Provider>
     )
 }
 

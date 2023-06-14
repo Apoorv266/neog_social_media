@@ -19,3 +19,6 @@ button{
   box-shadow: rgba(6, 0, 0, 0.672) 0px 3px 15px;
 }
 
+body{
+  background-color: var(--background-color);
+}

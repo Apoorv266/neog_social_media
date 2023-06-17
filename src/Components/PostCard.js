@@ -1,9 +1,9 @@
 import React from "react";
 import "../Styles/PostCard.css";
 import { HeartOutline, ShareSocialOutline, BookmarkOutline, ChatboxEllipsesOutline} from "react-ionicons";
-const PostCard = () => {
+const PostCard = ({item}) => {
   return (
-    <div className="single-post-main">
+    <div className="single-post-main" key={item._id}>
       <div className="single-card-wrapper">
         <img
           src={require("../Images/profile.png")}
@@ -13,12 +13,12 @@ const PostCard = () => {
         />
         <div className="post-details">
           <div className="user-post-details">
-            <p>Tanay Pratap</p>
-            <p style={{color: "lightgray"}}>@tanaypratap</p>
+            <p>{item.username}</p>
+            <p style={{color: "lightgray"}}>{item.createdAt.slice(0, 10)}</p>
           </div>
           <div className="post-data">
             <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quiAt vero eos et accusamus et iusto odio dignissimos ducimus quid
+           {item.content}
             </p>
           </div>
         </div>

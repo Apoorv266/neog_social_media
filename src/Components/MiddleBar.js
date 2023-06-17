@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Styles/MiddleBar.css";
 import PostCard from "./PostCard";
+import { postContext } from "../Contexts/PostContext";
 
 const MiddleBar = () => {
+  const {allPost} = useContext(postContext)
   return (
     <>
       <div className="post-container">
@@ -24,11 +26,9 @@ const MiddleBar = () => {
           </div>
           <button className="post-btn">Post</button>
         </div>
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {allPost?.map((item) =>{
+          return <PostCard item={item}/>
+        })}
       </div>
     </>
   );

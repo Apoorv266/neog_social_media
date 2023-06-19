@@ -1,16 +1,38 @@
 import React from 'react'
-import "../Styles/Rightbar.css" 
+import "../Styles/Rightbar.css"
 import SuggUserCard from './SuggUserCard'
+import { useContext } from 'react'
+import { userContext } from '../Contexts/UserContext'
+import { authContext } from '../Contexts/AuthContext'
+import { postContext } from '../Contexts/PostContext'
+
 const RightBar = () => {
+  const { userState } = useContext(userContext);
+  const { authLoader } = useContext(authContext);
+  const {postDispatch, postState} = useContext(postContext)
+
+  const {filterBytrending, filterByDate} = postState
   return (
     <div className='rightbar-main'>
-        <input type="text" name="" id="search-input"  placeholder='search for users !'/>
-        <div className='sug-users-main'>
-            <h3>Suggested Users</h3>
-            <SuggUserCard/>
-            <SuggUserCard/>
-            <SuggUserCard/>
-        </div>
+      <input type="text" name="" id="search-input" placeholder='search for users !' />
+      <div>
+        <div className='filter-btn-container'>
+
+
+        <button style={{backgroundColor: filterBytrending ? "green" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_TRENDING" })} className='filter-btn' >Trending</button >
+
+
+        <button style={{backgroundColor: filterByDate ? "green" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_DATE" })} className='filter-btn'>Latest</button>
+      </div>
+      </div>
+      {authLoader ? <div className="loader-img-main">
+        <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"} />
+      </div> : <div className='sug-users-main'>
+        <h3>Suggested Users</h3>
+        {userState?.allUsers.map((item) => {
+          return <SuggUserCard item={item} key={item._id} />
+        })}
+      </div>}
     </div>
   )
 }

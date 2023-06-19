@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import "../Styles/MiddleBar.css";
 import PostCard from "./PostCard";
 import { postContext } from "../Contexts/PostContext";
+import { authContext } from "../Contexts/AuthContext";
 
 const MiddleBar = () => {
-  const {allPost} = useContext(postContext)
+  const {filterByDate} = useContext(postContext);
+  const { authLoader } = useContext(authContext);
   return (
     <>
       <div className="post-container">
@@ -26,9 +28,17 @@ const MiddleBar = () => {
           </div>
           <button className="post-btn">Post</button>
         </div>
-        {allPost?.map((item) =>{
-          return <PostCard item={item}/>
-        })}
+        {authLoader ? (
+          <div className="loader-img-main">
+            <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"}/>
+          </div>
+        ) : (
+          <>
+            {filterByDate?.map((item) => {
+              return <PostCard item={item} />;
+            })}
+          </>
+        )}
       </div>
     </>
   );

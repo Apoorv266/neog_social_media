@@ -1,13 +1,13 @@
 import React from "react";
 import "../Styles/Rightbar.css";
 
-const SuggUserCard = () => {
+const SuggUserCard = ({item}) => {
   return (
     <div className="sugg-User-Card-main">
-      <img src={require("../Images/profile.png")} alt="" width={"50px"} />
+      <img src={item.avatarUrl} alt="" width={"50px"} height={"50px"}style={{borderRadius: "50%" , backgroundSize: "cover", objectFit: "cover"}}/>
       <div className="user-details">
-        <p>john doe</p>
-        <p>@johndoe</p>
+        <p>{item.firstName}{item.lastName}</p>
+        <p>@{item.username}</p>
       </div>
       <div>
 

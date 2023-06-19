@@ -10,6 +10,7 @@ const AuthContextWrapper = ({ children }) => {
     const [userData, setuserData] = useState(storageUser)
     const [userToken, setuserToken] = useState(storageToken)
     const [loader, setloader] = useState(false)
+   const [authLoader, setauthLoader] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -75,7 +76,7 @@ const AuthContextWrapper = ({ children }) => {
         }, 2000);
     }
     return (
-        <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc }}>{children}</authContext.Provider>
+        <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc,setauthLoader,authLoader }}>{children}</authContext.Provider>
     )
 }
 

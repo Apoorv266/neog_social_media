@@ -29,4 +29,15 @@
     height: 50px;
 }
 
+.likes-card{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    gap: 5px;
+}
 
+.likes{
+    margin-top: -6px;
+    color: white;
+    font-size: 26px;
+}

@@ -1,10 +1,14 @@
 import React from "react";
 import "../Styles/PostCard.css";
-import { HeartOutline, ShareSocialOutline, BookmarkOutline, ChatboxEllipsesOutline } from "react-ionicons";
+import { ThumbsUpOutline, ShareSocialOutline, BookmarkOutline, ChatboxEllipsesOutline, ThumbsUp, ThumbsDownOutline ,ThumbsDown} from "react-ionicons";
 import { useContext } from "react";
 import { userContext } from "../Contexts/UserContext";
+import { postContext } from "../Contexts/PostContext";
+import { authContext } from "../Contexts/AuthContext";
 const PostCard = ({ item }) => {
   const { userState } = useContext(userContext)
+  const { userData } = useContext(authContext)
+  const { isPostLiked, dislikePostFunc , isPostDisliked, likePostFunc} = useContext(postContext)
 
   const profilePicFunc = (currUsername) => {
     const matchedObj = userState?.allUsers.find((item) => item.username === currUsername)
@@ -34,8 +38,20 @@ const PostCard = ({ item }) => {
       </div>
       <div className="post-icons">
         <span className="likes-card">
-        <HeartOutline color={"white"} height="30px" width="30px" /><span className="likes"><p>{item.likes.likeCount}</p></span>
+          {isPostLiked(item, userData) ? <ThumbsUp
+            color={'#ffffff'}
+            height="30px" width="30px"
+          /> : <ThumbsUpOutline color={"white"} height="30px" width="30px" onClick={() => likePostFunc(item._id)} />}
+          <span className="likes"><p>{item.likes.likeCount}</p>
+          </span>
         </span>
+
+        {isPostDisliked(item, userData) ? <ThumbsDown
+          color={"white"} height="30px" width="30px"
+        />: <ThumbsDownOutline
+          color={"white"} height="30px" width="30px"
+          onClick={()=>dislikePostFunc(item._id)}
+        />}
         <ChatboxEllipsesOutline color={"white"} height="30px" width="30px" />
 
         <ShareSocialOutline color={"white"} height="30px" width="30px" />

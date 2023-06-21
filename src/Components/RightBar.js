@@ -19,10 +19,10 @@ const RightBar = () => {
         <div className='filter-btn-container'>
 
 
-        <button style={{backgroundColor: filterBytrending ? "green" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_TRENDING" })} className='filter-btn' >Trending</button >
+        <button style={{backgroundColor: filterBytrending ? "#00937E" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_TRENDING" })} className='filter-btn' >Trending</button >
 
 
-        <button style={{backgroundColor: filterByDate ? "green" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_DATE" })} className='filter-btn'>Latest</button>
+        <button style={{backgroundColor: filterByDate ? "#00937E" : `var(--utils-color)`}} onClick={() => postDispatch({ type: "TOGGLE_FILTER_DATE" })} className='filter-btn'>Latest</button>
       </div>
       </div>
       {authLoader ? <div className="loader-img-main">

@@ -13,9 +13,9 @@ const Home = () => {
             <div className='home-main'>
                 <SideNavbar />
                 <Routes>
-                    <Route path='/' element={<MiddleBar/>}/>
+                    <Route path='/' element={<MiddleBar />} />
                 </Routes>
-            <RightBar/>
+                <RightBar />
             </div>
         </>
     )

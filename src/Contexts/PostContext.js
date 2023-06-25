@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState, createContext } from 'react'
+import React, { useEffect, createContext } from 'react'
 import { useContext } from 'react'
 import { authContext } from './AuthContext'
 import { useReducer } from 'react'
@@ -61,7 +61,7 @@ const PostContextWrapper = ({ children }) => {
         data: { posts },
       } = await axios.post(
         `/api/posts/dislike/${postId}`,
-        {},
+        
         {
           headers: { authorization: userToken },
         }
@@ -71,18 +71,37 @@ const PostContextWrapper = ({ children }) => {
         postDispatch({ type: "DISLIKE_POST", payload: posts })
       }
     } catch (error) {
-      // const {
-      //   response: { status },
-      // } = error;
+      const {
+        response: { status },
+      } = error;
 
-      // if (status === 400) {
-      //   console.log("post already disliked")
-      // }
-      // else {
-        console.log("something went wrong")
-      // }
+      if (status === 400) {
+        console.log("Post must have atleast 1 like!")
+      }
+      else {
+        console.log(error)
+      }
     }
-  
+
+  }
+
+
+  const deletePostFunc = async (postId) => {
+    try {
+      const {
+        status,
+        data: { posts },
+      } = await axios.delete(`api/posts/${postId}`, {
+        headers: { authorization: userToken },
+      })
+
+      if (status === 201) {
+        postDispatch({type: "DELETE_POST", payload : posts})
+      }
+      console.log(posts)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -91,7 +110,7 @@ const PostContextWrapper = ({ children }) => {
     return currPost?.likes.likedBy.find((likeUser) => likeUser.username === userData.username);
   }
 
-  const isPostDisliked = (currPost, userData) =>{
+  const isPostDisliked = (currPost, userData) => {
     return currPost?.likes.dislikedBy.find((likeUser) => likeUser.username === userData.username);
   }
 
@@ -100,7 +119,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked,deletePostFunc }}>{children}</postContext.Provider>
   )
 }
 

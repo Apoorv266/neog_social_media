@@ -106,8 +106,8 @@ const PostContextWrapper = ({ children }) => {
 
 
   const bookmarPosts = async (postId) => {
-    console.log(userData.bookmarks)
-    const { status, data: { bookmarks } } = await axios.post(`api/users/bookmark/${postId}`,
+    try {
+      const { status, data: { bookmarks } } = await axios.post(`api/users/bookmark/${postId}`,
       {},
       {
         headers: { authorization: userToken }
@@ -115,7 +115,11 @@ const PostContextWrapper = ({ children }) => {
     if (status === 200) {
       setuserData((state) => ({ ...state, bookmarks: bookmarks }))
       localStorage.setItem("user", JSON.stringify(userData))
+    } 
+    } catch (error) {
+      console.log(error)
     }
+   
   }
 
 

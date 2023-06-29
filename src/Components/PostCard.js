@@ -9,7 +9,7 @@ import { authContext } from "../Contexts/AuthContext";
 const PostCard = ({ item }) => {
   const { userState } = useContext(userContext)
   const { userData } = useContext(authContext)
-  const { isPostLiked, dislikePostFunc, isPostDisliked, likePostFunc, deletePostFunc } = useContext(postContext)
+  const { isPostLiked, dislikePostFunc, isPostDisliked, likePostFunc, deletePostFunc, bookmarPosts } = useContext(postContext)
 
   const profilePicFunc = (currUsername) => {
     const matchedObj = userState?.allUsers.find((item) => item.username === currUsername)
@@ -72,7 +72,7 @@ const PostCard = ({ item }) => {
 
         <ShareSocialOutline color={"white"} height="30px" width="30px" />
 
-        <BookmarkOutline color={"white"} height="30px" width="30px" />
+        <BookmarkOutline color={"white"} height="30px" width="30px" onClick={() => bookmarPosts(item._id)} />
       </div>
     </div>
   );

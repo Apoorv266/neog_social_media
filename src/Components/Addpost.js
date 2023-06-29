@@ -24,7 +24,7 @@ const Addpost = () => {
                 <img
                     src={require("../Images/profile.png")}
                     alt=""
-                    srcset=""
+                    srcSet=""
                     width={"50px"}
                 />
                 <textarea

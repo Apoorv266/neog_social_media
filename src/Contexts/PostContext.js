@@ -8,7 +8,7 @@ import { initialPostData, postReducerFunc } from '../Reducers/PostReducer'
 
 export const postContext = createContext()
 const PostContextWrapper = ({ children }) => {
-  const { setauthLoader, userToken } = useContext(authContext)
+  const { setauthLoader, userToken, userData, setuserData } = useContext(authContext)
   const [postState, postDispatch] = useReducer(postReducerFunc, initialPostData)
 
   const fetchPosts = async () => {
@@ -61,7 +61,7 @@ const PostContextWrapper = ({ children }) => {
         data: { posts },
       } = await axios.post(
         `/api/posts/dislike/${postId}`,
-        
+        {},
         {
           headers: { authorization: userToken },
         }
@@ -96,7 +96,7 @@ const PostContextWrapper = ({ children }) => {
       })
 
       if (status === 201) {
-        postDispatch({type: "DELETE_POST", payload : posts})
+        postDispatch({ type: "DELETE_POST", payload: posts })
       }
       console.log(posts)
     } catch (error) {
@@ -104,6 +104,19 @@ const PostContextWrapper = ({ children }) => {
     }
   }
 
+
+  const bookmarPosts = async (postId) => {
+    console.log(userData.bookmarks)
+    const {status, data : {bookmarks}} = await axios.post(`api/users/bookmark/${postId}`,
+      {},
+      {
+        headers: { authorization: userToken }
+      })
+   if (status === 200) {
+    setuserData((state) => ({...state, bookmarks : bookmarks}))
+    localStorage.setItem("user", JSON.stringify(userData))
+   }
+  }
 
 
   const isPostLiked = (currPost, userData) => {
@@ -119,7 +132,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked,deletePostFunc }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarPosts }}>{children}</postContext.Provider>
   )
 }
 

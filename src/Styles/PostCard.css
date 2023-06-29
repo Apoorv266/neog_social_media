@@ -8,10 +8,23 @@
     width: 100%;
     /* min-height: 50vh; */
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     color: white;
     padding: 20px;
+}
+
+.utils-icons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-Details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .user-post-details{
@@ -29,4 +42,15 @@
     height: 50px;
 }
 
+.likes-card{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    gap: 5px;
+}
 
+.likes{
+    margin-top: -6px;
+    color: white;
+    font-size: 26px;
+}

@@ -10,8 +10,8 @@ const SideNavbar = () => {
         <div className='sideNav-main'>
             <NavLink className="nav-link" to="/"><p>Home</p></NavLink>
             <NavLink className="nav-link" to="/explore"><p>Explore</p></NavLink>
-            <NavLink className="nav-link"><p>Bookmark</p></NavLink>
-            <NavLink className="nav-link"><p>Profile</p></NavLink>
+            <NavLink className="nav-link" to="/bookmarks"><p>Bookmark</p></NavLink>
+            <NavLink className="nav-link" to={'/profile'}><p>Profile</p></NavLink>
             <button className='logout-btn' onClick={handleLogout}>Logout</button>
         </div>
     )

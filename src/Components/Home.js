@@ -6,6 +6,9 @@ import RightBar from './RightBar'
 import "../Styles/Home.css"
 import MiddleBar from './MiddleBar'
 import Explore from './Explore'
+import Bookmarks from './Bookmarks'
+import Profile from './Profile/Profile'
+
 
 const Home = () => {
     return (
@@ -16,6 +19,8 @@ const Home = () => {
                 <Routes>
                     <Route path='/*' element={<MiddleBar />} />
                     <Route path='/explore' element={<Explore />} />
+                    <Route path='/bookmarks' element={<Bookmarks />} />
+                    <Route path='/profile' element={<Profile />} />
                 </Routes>
                 <RightBar />
             </div>

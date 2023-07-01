@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/PostCard.css";
-import { ThumbsUpOutline, ShareSocialOutline, BookmarkOutline, ChatboxEllipsesOutline, ThumbsUp, ThumbsDownOutline, ThumbsDown, TrashOutline, PencilOutline } from "react-ionicons";
+import { ThumbsUpOutline, ShareSocialOutline, BookmarkOutline, ChatboxEllipsesOutline, ThumbsUp, ThumbsDownOutline, ThumbsDown, TrashOutline, PencilOutline , Bookmark} from "react-ionicons";
 import { useContext } from "react";
 import { userContext } from "../Contexts/UserContext";
 import { postContext } from "../Contexts/PostContext";
@@ -9,7 +9,7 @@ import { authContext } from "../Contexts/AuthContext";
 const PostCard = ({ item }) => {
   const { userState } = useContext(userContext)
   const { userData } = useContext(authContext)
-  const { isPostLiked, dislikePostFunc, isPostDisliked, likePostFunc, deletePostFunc, bookmarPosts } = useContext(postContext)
+  const { isPostLiked, dislikePostFunc, isPostDisliked, likePostFunc, deletePostFunc, bookmarkFunc,removebookmarkFunc, isPostBookmarked } = useContext(postContext)
 
   const profilePicFunc = (currUsername) => {
     const matchedObj = userState?.allUsers.find((item) => item.username === currUsername)
@@ -57,6 +57,7 @@ const PostCard = ({ item }) => {
           {isPostLiked(item, userData) ? <ThumbsUp
             color={'#ffffff'}
             height="30px" width="30px"
+        
           /> : <ThumbsUpOutline color={"white"} height="30px" width="30px" onClick={() => likePostFunc(item._id)} />}
           <span className="likes"><p>{item.likes.likeCount}</p>
           </span>
@@ -72,7 +73,7 @@ const PostCard = ({ item }) => {
 
         <ShareSocialOutline color={"white"} height="30px" width="30px" />
 
-        <BookmarkOutline color={"white"} height="30px" width="30px" onClick={() => bookmarPosts(item._id)} />
+       {isPostBookmarked(item._id)  ? <Bookmark color={"white"} height="30px" width="30px" onClick={()=>removebookmarkFunc(item._id)}/> : <BookmarkOutline color={"white"} height="30px" width="30px" onClick={() => bookmarkFunc(item._id)} />}
       </div>
     </div>
   );

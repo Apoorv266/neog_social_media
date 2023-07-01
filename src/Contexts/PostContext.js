@@ -24,10 +24,26 @@ const PostContextWrapper = ({ children }) => {
     }
 
   }
+
+  const getbookMarkPosts = async () => {
+    try {
+      const {status , data : {bookmarks}} = await axios.get("api/users/bookmark",
+      {
+        headers: { authorization: userToken },
+      })
+     if (status === 200) {
+      postDispatch({ type: "GET_BOOKMARK", payload: bookmarks })
+     }
+    } catch (error) {
+      console.log("bookmark", error)
+    }
+
+  }
   useEffect(() => {
     setauthLoader(true)
     setTimeout(() => {
       fetchPosts()
+      getbookMarkPosts()
     }, 1000);
   }, [])
 
@@ -105,38 +121,54 @@ const PostContextWrapper = ({ children }) => {
   }
 
 
-  const bookmarPosts = async (postId) => {
+  const bookmarkFunc = async (postId) => {
     try {
-      const { status, data: { bookmarks } } = await axios.post(`api/users/bookmark/${postId}`,
-      {},
-      {
-        headers: { authorization: userToken }
-      })
-    if (status === 200) {
-      setuserData((state) => ({ ...state, bookmarks: bookmarks }))
-      localStorage.setItem("user", JSON.stringify(userData))
-    } 
+      const { status, data: { bookmarks } } = await axios.post(`/api/users/bookmark/${postId}`,
+        {},
+        {
+          headers: { authorization: userToken }
+        })
+      if (status === 200) {
+        postDispatch({ type: "ADD_BOOKMARK", payload: bookmarks })
+      }
     } catch (error) {
       console.log(error)
     }
-   
   }
 
+
+
+  const removebookmarkFunc = async (postId) => {
+    try {
+      const { status, data: { bookmarks } } = await axios.post(`api/users/remove-bookmark/${postId}`,
+        {},
+        {
+          headers: { authorization: userToken }
+        })
+      if (status === 200) {
+        postDispatch({ type: "REMOVE_BOOKMARK", payload: bookmarks })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const isPostLiked = (currPost, userData) => {
     return currPost?.likes.likedBy.find((likeUser) => likeUser.username === userData.username);
   }
 
   const isPostDisliked = (currPost, userData) => {
-    return currPost?.likes.dislikedBy.find((likeUser) => likeUser.username === userData.username);
+    return currPost?.likes.dislikedBy.find((dislikeUser) => dislikeUser.username === userData.username);
   }
+
+  const isPostBookmarked = (eachPostId) => postState?.bookmarkPosts?.find(item => item === eachPostId)
 
   const filterTrending = postState.filterBytrending ? [...postState.allPosts].sort((a, b) => b.likes.likeCount - a.likes.likeCount) : postState.allPosts
 
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarPosts }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked }}>{children}</postContext.Provider>
   )
 }
 

@@ -9,7 +9,7 @@ const SuggUserCard = ({ item }) => {
     <div className="sugg-User-Card-main" key={item._id}>
       
       <img src={item.avatarUrl} alt="" width={"50px"} height={"50px"} style={{ borderRadius: "50%", backgroundSize: "cover", objectFit: "cover" }} />
-       <Link to={`/profile/${item.username}`}>
+       <Link to={`/profile/${item.username}`} style={{ textDecoration: 'none' }}>
       <div className="user-details">
         <p>{item.firstName}{item.lastName}</p>
         <p>@{item.username}</p>

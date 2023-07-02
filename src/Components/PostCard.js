@@ -29,12 +29,12 @@ const PostCard = ({ item }) => {
             />
             <div className="post-details">
               <div className="user-post-details">
-                <Link to={`/profile/${item.username}`}>
+                <Link to={`/profile/${item.username}`} style={{ textDecoration: 'none' }}>
                 <p>{item.username}</p>
                 </Link>
                 <p style={{ color: "lightgray" }}>{item.createdAt.slice(0, 10)}</p>
               </div>
-        <Link to={`/post/${item._id}`}>
+        <Link to={`/post/${item._id}`} style={{ textDecoration: 'none' }}>
               <div className="post-data">
                 <p>
                   {item.content}

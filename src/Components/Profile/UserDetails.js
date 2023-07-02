@@ -1,16 +1,23 @@
 import React from "react";
+import "../../Styles/UserDetails.css";
 import { useContext } from "react";
 import { authContext } from "../../Contexts/AuthContext";
-import "../../Styles/UserDetails.css";
+import { userContext } from "../../Contexts/UserContext";
 
-const UserDetails = ({loggedUserPost}) => {
-  const { userData } = useContext(authContext);
-  const {followers,following , bio, firstName, lastName, username, website, createdAt} = userData
+const UserDetails = ({ userProfileData, postLen}) => {
+  const {followers,following , bio, firstName, lastName, username, website, createdAt, avatarUrl, _id} = userProfileData
+const {userData} = useContext(authContext)
+const { followUsers , unFollowFunc} = useContext(userContext)
+
+const isUserFollowed = () =>{
+  const followedUser = userData.following.find(item => item.username === username)
+  return followedUser
+}
   return (
     <>
       <div className="main-details">
         <img
-          src={`${userData.avatarUrl}`}
+          src={`${avatarUrl}`}
           alt=""
           srcSet=""
           width={"70px"}
@@ -26,15 +33,15 @@ const UserDetails = ({loggedUserPost}) => {
           <p><strong>Username : </strong>@{`${username}`}</p>
           <p><strong>Bio : </strong>{bio}</p>
           <p><strong>Site : </strong><a href={website} target="_blank">{website}</a></p>
-          <p><strong>Joined on :</strong> {createdAt.slice(0, 10)}</p>
+          <p><strong>Joined on :</strong> {createdAt?.slice(0, 10)}</p>
         </div>
-        <button className="edt-profile-btn">Edit profile</button>
+        {userData.username === username ? <button className="edt-profile-btn">Edit profile</button> : isUserFollowed() ?<button className="edt-profile-btn" onClick={() => unFollowFunc(_id)}>Unfollow</button> : <button className="edt-profile-btn" onClick={() => followUsers(_id)}>Follow</button>}
       </div>
 
       <div className="stats-main">
-        <h3>{loggedUserPost.length} Posts</h3>
-        <h3>{followers.length} followers</h3>
-        <h3>{following.length} following</h3>
+        <h3>{postLen?.length} Posts</h3>
+        <h3>{followers?.length} followers</h3>
+        <h3>{following?.length} following</h3>
       </div>
     </>
   );

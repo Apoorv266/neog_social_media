@@ -8,7 +8,7 @@ import { initialPostData, postReducerFunc } from '../Reducers/PostReducer'
 
 export const postContext = createContext()
 const PostContextWrapper = ({ children }) => {
-  const { setauthLoader, userToken, userData, setuserData } = useContext(authContext)
+  const { setauthLoader, userToken} = useContext(authContext)
   const [postState, postDispatch] = useReducer(postReducerFunc, initialPostData)
 
   const fetchPosts = async () => {
@@ -27,13 +27,13 @@ const PostContextWrapper = ({ children }) => {
 
   const getbookMarkPosts = async () => {
     try {
-      const {status , data : {bookmarks}} = await axios.get("api/users/bookmark",
-      {
-        headers: { authorization: userToken },
-      })
-     if (status === 200) {
-      postDispatch({ type: "GET_BOOKMARK", payload: bookmarks })
-     }
+      const { status, data: { bookmarks } } = await axios.get("api/users/bookmark",
+        {
+          headers: { authorization: userToken },
+        })
+      if (status === 200) {
+        postDispatch({ type: "GET_BOOKMARK", payload: bookmarks })
+      }
     } catch (error) {
       console.log("bookmark", error)
     }
@@ -114,7 +114,6 @@ const PostContextWrapper = ({ children }) => {
       if (status === 201) {
         postDispatch({ type: "DELETE_POST", payload: posts })
       }
-      console.log(posts)
     } catch (error) {
       console.log(error)
     }
@@ -140,7 +139,7 @@ const PostContextWrapper = ({ children }) => {
 
   const removebookmarkFunc = async (postId) => {
     try {
-      const { status, data: { bookmarks } } = await axios.post(`api/users/remove-bookmark/${postId}`,
+      const { status, data: { bookmarks } } = await axios.post(`/api/users/remove-bookmark/${postId}`,
         {},
         {
           headers: { authorization: userToken }
@@ -150,6 +149,56 @@ const PostContextWrapper = ({ children }) => {
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const addCommentFunc = async (postId, commentData) => {
+    try {
+      const {
+        status,
+        data: { posts },
+      } = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData: commentData },
+        { headers: { authorization: userToken } }
+      );
+      if (status === 201) {
+        postDispatch({ type: "ADD_COMMENT", payload: posts })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const deleteCommentFunc = async (postId, commentId) => {
+    try {
+      const {
+        status,
+        data: { posts },
+      } = await axios.post(`/api/comments/delete/${postId}/${commentId}`, {}, { headers: { authorization: userToken } })
+
+    if (status === 201) {
+      postDispatch({ type: "DELETE_COMMENT", payload: posts })
+    }
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+
+  const getUserPostFunc = async (username) =>{
+    try {
+      const {status , data: {posts}} = await axios.get(`/api/posts/user/${username}`)
+      if (status === 200) {
+        const currPostId = posts.map((item) => item._id)
+        postDispatch({ type: "ADD_USER_POST", payload: currPostId })
+      }
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setauthLoader(false)
     }
   }
 
@@ -168,7 +217,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc }}>{children}</postContext.Provider>
   )
 }
 

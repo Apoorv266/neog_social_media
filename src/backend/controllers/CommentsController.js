@@ -51,7 +51,7 @@ export const addPostCommentHandler = function (schema, request) {
 
     const comment = {
       _id: uuid(),
-      ...commentData,
+      commentData : commentData,
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,

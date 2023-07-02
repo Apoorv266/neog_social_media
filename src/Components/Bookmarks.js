@@ -8,12 +8,12 @@ const Bookmarks = () => {
   const { allPosts, bookmarkPosts } = postState
   console.log(postState)
   return (
-    <div className="post-container">
+   bookmarkPosts.length > 0 ?<div className="post-container">
       {bookmarkPosts?.map((bookmarkItem) => {
         const item = allPosts.find(({_id}) => _id === bookmarkItem)
         return <PostCard item={item} />;
       })}
-    </div>
+    </div> : <h1 style={{color: "white"}}>No bookmarked Posts !</h1>
   )
 }
 

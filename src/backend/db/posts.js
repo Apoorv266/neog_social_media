@@ -20,7 +20,7 @@ export const posts = [
       {
         _id: "okzxcf",
         username: "janedoe",
-        text: "I agree!! Feels like we should go for outing. What say?",
+        commentData: "I agree!! Feels like we should go for outing. What say?",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -60,7 +60,7 @@ export const posts = [
       {
         _id: "6nImWvImxo",
         username: "johndoe",
-        text: "That's mouth watering! Could you make one for my Birthday as well?",
+        commentData: "That's mouth watering! Could you make one for my Birthday as well?",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -100,7 +100,7 @@ export const posts = [
       {
         _id: "EO7iOPN9n8",
         username: "carlsmith",
-        text: "Happy Birthday! Enjoy your Day!!",
+        commentData: "Happy Birthday! Enjoy your Day!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -109,7 +109,7 @@ export const posts = [
       {
         _id: "QK52wf6HI1",
         username: "janedoe",
-        text: "Wow! Looks Amazzing! Happy Birthday!",
+        commentData: "Wow! Looks Amazzing! Happy Birthday!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -178,7 +178,7 @@ export const posts = [
       {
         _id: "6nIffvImxo",
         username: "sophiajones",
-        text: "Oh! That looks Delicious!",
+        commentData: "Oh! That looks Delicious!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -203,7 +203,7 @@ export const posts = [
       {
         _id: "6fgd534s",
         username: "janedoe",
-        text: "Yes! I am also learning from there!",
+        commentData: "Yes! I am also learning from there!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -227,7 +227,7 @@ export const posts = [
       {
         _id: "unImWvIzbf",
         username: "romabulani",
-        text: "So True!!",
+        commentData: "So True!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

@@ -54,7 +54,7 @@ export const users = [
     bio: "Whats in bio?",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651563581/socialmedia/avatars/carl-smith_mehw0u.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://foogle.com/",
     createdAt: "2022-01-03T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -82,7 +82,7 @@ export const users = [
     bio: "What's up?",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525373/socialmedia/avatars/alex-maxwell.webp",
-    website: "",
+    website: "https://facebook.com/",
     createdAt: "2022-01-05T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -96,7 +96,7 @@ export const users = [
     bio: "Frontend Engineer",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525510/socialmedia/avatars/sophia-jones.webp",
-    website: "",
+    website:"https://tinder.com/",
     createdAt: "2022-01-06T10:55:06+05:30",
     updatedAt: formatDate(),
   },

@@ -8,6 +8,7 @@ import Loader from './Components/Loader';
 import Signup from './Pages/Signup';
 import Home from './Components/Home';
 
+
 function App() {
   const {loader } = useContext(authContext)
   return (

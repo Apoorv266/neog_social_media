@@ -22,3 +22,7 @@ button{
 body{
   background-color: var(--background-color);
 }
+
+Link{
+  text-decoration: none;
+}

@@ -1,5 +1,7 @@
 export const initialPostData = {
     allPosts: [],
+    bookmarkPosts: [],
+    userProfilePosts : [],
     filterBytrending: false,
     filterByDate: false
 }
@@ -19,6 +21,18 @@ export const postReducerFunc = (state, action) => {
             return { ...state, allPosts: action.payload }
         case "DELETE_POST":
             return { ...state, allPosts: action.payload }
+        case "GET_BOOKMARK":
+            return { ...state, bookmarkPosts: action.payload }
+        case "ADD_BOOKMARK":
+            return { ...state, bookmarkPosts: action.payload }
+            case "REMOVE_BOOKMARK":
+            return { ...state, bookmarkPosts: action.payload }
+            case "ADD_COMMENT":
+                return { ...state, allPosts: action.payload }
+                case "DELETE_COMMENT":
+                    return { ...state, allPosts: action.payload }
+        case "ADD_USER_POST":
+                        return { ...state, userProfilePosts: action.payload }
         default:
             return state
     }

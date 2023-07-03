@@ -1,0 +1,39 @@
+.main-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.login-user-details{
+    color: white;
+    margin-left: -40px;
+}
+
+.edt-profile-btn{
+    margin-top: 20px;
+    height: 30px;
+    width: 200px;
+    background-color: var(--utils-color);
+    border:none;
+    color: white;
+    font-size: 17px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.stats-main{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.login-user-details a{
+    text-decoration: none;
+    color: white;
+}
+
+.login-user-details a:hover{
+    text-decoration: underline;
+}

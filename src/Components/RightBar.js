@@ -8,7 +8,7 @@ import { postContext } from '../Contexts/PostContext'
 
 const RightBar = () => {
   const { userState } = useContext(userContext);
-  const { authLoader ,userData, followUserList} = useContext(authContext);
+  const { authLoader, userData, followUserList } = useContext(authContext);
   const { postDispatch, postState } = useContext(postContext)
 
   const { filterBytrending, filterByDate } = postState

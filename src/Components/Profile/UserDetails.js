@@ -52,14 +52,14 @@ const UserDetails = ({ userProfileData, postLen }) => {
           open: true,
           data: followers,
           title: "Followers List"
-        })}>{followers?.length} followers</h3>
+        })} style={{cursor : "pointer"}}>{followers?.length} followers</h3>
 
 
         <h3 onClick={() => setfollowModal({
           open: true,
           data: following,
           title: "Following List"
-        })}>{following?.length} following</h3>
+        })} style={{cursor : "pointer"}}>{following?.length} following</h3>
 
 
       </div>

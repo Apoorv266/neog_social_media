@@ -3,12 +3,14 @@ import React, { createContext, useContext, useEffect } from 'react'
 import { useReducer } from 'react'
 import { initialUserData, userReducerFunc } from '../Reducers/UsersReducer'
 import { authContext } from './AuthContext'
+import { useState } from 'react'
 
 export const userContext = createContext()
 
 const UserContextWrapper = ({ children }) => {
   const [userState, userDispatch] = useReducer(userReducerFunc, initialUserData)
   const { userToken,setuserData,setauthLoader } = useContext(authContext)
+  const [userSearchField, setuserSearchField] = useState("")
 
   const fetchUsers = async () => {
     try {
@@ -81,8 +83,14 @@ const UserContextWrapper = ({ children }) => {
     return obj.avatarUrl
   }
 
+
+  const filterUserFunc = () =>{
+    const filterUser = userSearchField ? userState.allUsers.filter((item) => item.username.toLowerCase().includes(userSearchField.toLowerCase())) :userState.allUsers
+    return filterUser
+  }
+
   return (
-    <userContext.Provider value={{ userState,unFollowFunc , followUsers, getUserAvatarImg , getUserDetailsFunc }}>{children}</userContext.Provider>
+    <userContext.Provider value={{ userState,unFollowFunc , followUsers, getUserAvatarImg , getUserDetailsFunc,userSearchField , setuserSearchField, filterUserFunc }}>{children}</userContext.Provider>
   )
 }
 

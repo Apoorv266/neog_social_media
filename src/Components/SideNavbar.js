@@ -1,17 +1,23 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { authContext } from '../Contexts/AuthContext'
 import "../Styles/SideNavbar.css"
 
 
-const SideNavbar = () => {
+const SideNavbar = ({setshowFilter}) => {
     const { handleLogout } = useContext(authContext)
+    let navigate = useNavigate();
+
+    const routeFunc = (str, value) => {
+        navigate(`${str}`)
+        setshowFilter(value)
+    }
     return (
         <div className='sideNav-main'>
-            <NavLink className="nav-link" to="/"><p>Home</p></NavLink>
-            <NavLink className="nav-link" to="/explore"><p>Explore</p></NavLink>
-            <NavLink className="nav-link" to="/bookmarks"><p>Bookmark</p></NavLink>
-            <NavLink className="nav-link" to={`/profile/adarshbalika`}><p>Profile</p></NavLink>
+            <p onClick={() => routeFunc("/", true)} className="nav-link">Home</p>
+            <p onClick={() => routeFunc("/explore", false)} className="nav-link">Explore</p>
+            <p onClick={() => routeFunc("/bookmarks", false)}  className="nav-link">Bookmark</p>
+            <p onClick={() => routeFunc("/profile/adarshbalika", false)} className="nav-link">Profile</p>
             <button className='logout-btn' onClick={handleLogout}>Logout</button>
         </div>
     )

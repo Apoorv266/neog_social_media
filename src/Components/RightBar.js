@@ -6,27 +6,27 @@ import { userContext } from '../Contexts/UserContext'
 import { authContext } from '../Contexts/AuthContext'
 import { postContext } from '../Contexts/PostContext'
 
-const RightBar = () => {
-  const { userState } = useContext(userContext);
+const RightBar = ({showFilter}) => {
+  const {  setuserSearchField, userSearchField, filterUserFunc } = useContext(userContext);
   const { authLoader, userData, followUserList } = useContext(authContext);
   const { postDispatch, postState } = useContext(postContext)
 
   const { filterBytrending, filterByDate } = postState
 
-  const suggUserList = userState?.allUsers.filter((item) => item.username !== userData?.username && !followUserList?.includes(item.username))
+  const suggUserList = filterUserFunc()?.filter((item) => item.username !== userData?.username && !followUserList?.includes(item.username))
   return (
     <div className='rightbar-main'>
-      <input type="text" name="" id="search-input" placeholder='search for users !' />
-      <div>
-        <div className='filter-btn-container'>
+      <input type="text" name="" id="search-input" placeholder='search for users !' value={userSearchField} onChange={(e)=>setuserSearchField(e.target.value)}/>
+
+       {showFilter && <div className='filter-btn-container'>
 
 
           <button style={{ backgroundColor: filterBytrending ? "#00937E" : `var(--utils-color)` }} onClick={() => postDispatch({ type: "TOGGLE_FILTER_TRENDING" })} className='filter-btn' >Trending</button >
 
 
           <button style={{ backgroundColor: filterByDate ? "#00937E" : `var(--utils-color)` }} onClick={() => postDispatch({ type: "TOGGLE_FILTER_DATE" })} className='filter-btn'>Latest</button>
-        </div>
-      </div>
+        </div>}
+    
       {authLoader ? <div className="loader-img-main">
         <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"} />
       </div> : suggUserList.length > 0 && <div className='sug-users-main'>

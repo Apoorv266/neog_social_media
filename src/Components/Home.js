@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import SideNavbar from './SideNavbar'
 import { Route, Routes } from 'react-router-dom'
@@ -11,11 +11,12 @@ import Profile from './Profile/Profile'
 import SinglePost from './SinglePost';
 
 const Home = () => {
+    const [showFilter, setshowFilter] = useState(true)
     return (
         <>
             <Navbar />
             <div className='home-main'>
-                <SideNavbar />
+                <SideNavbar setshowFilter={setshowFilter}/>
                 <Routes>
                     <Route path='/*' element={<MiddleBar />} />
                     <Route path='/explore' element={<Explore />} />
@@ -23,7 +24,7 @@ const Home = () => {
                     <Route path='/profile/:username' element={<Profile />} />
                     <Route path="/post/:postId" element={<SinglePost />} />
                 </Routes>
-                <RightBar />
+                <RightBar showFilter={showFilter}/>
             </div>
         </>
     )

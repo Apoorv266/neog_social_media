@@ -30,6 +30,7 @@ const PostCard = ({ item }) => {
     bookmarkFunc,
     removebookmarkFunc,
     isPostBookmarked,
+    seteditpostModal
   } = useContext(postContext);
 
   const mediaTypeFunc = (url) => {
@@ -76,7 +77,7 @@ const PostCard = ({ item }) => {
                 width="20px"
                 onClick={() => deletePostFunc(item._id)}
               />
-              <PencilOutline color={"#ffffff"} height="20px" width="20px" />
+              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>seteditpostModal(true)} />
             </>
           ) : (
             ""

@@ -3,7 +3,7 @@ import "../../Styles/UserDetails.css";
 import { useContext } from "react";
 import { authContext } from "../../Contexts/AuthContext";
 import { userContext } from "../../Contexts/UserContext";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal/FollowListModal/Modal";
 import { useState } from "react";
 
 const UserDetails = ({ userProfileData, postLen }) => {

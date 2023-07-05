@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../Styles/Modal.css"
+import "../../../Styles/Modal.css"
 import ModalList from './ModalList'
 
 const Modal = ({ modalData, setfollowModal, isUserFollowed }) => {

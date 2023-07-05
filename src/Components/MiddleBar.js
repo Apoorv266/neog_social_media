@@ -4,9 +4,10 @@ import PostCard from "./PostCard";
 import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
 import Addpost from "./Addpost";
+import EditPostModal from "./Modal/EditPostModal/EditPostModal";
 
 const MiddleBar = () => {
-  const {filterByDate} = useContext(postContext);
+  const {filterByDate, editpostModal} = useContext(postContext);
   const { authLoader,followUserList, userData } = useContext(authContext);
   const dispPost = filterByDate?.filter((item) => followUserList?.includes(item.username) || item.username === userData?.username)
   return (
@@ -25,6 +26,7 @@ const MiddleBar = () => {
           </>
         )}
       </div>
+{editpostModal && <EditPostModal/>}
     </>
   );
 };

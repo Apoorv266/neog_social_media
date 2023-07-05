@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../Styles/Modal.css"
+import "../../../Styles/Modal.css"
 import { useContext } from 'react'
-import { userContext } from '../../Contexts/UserContext'
-import { authContext } from '../../Contexts/AuthContext'
+import { userContext } from '../../../Contexts/UserContext'
+import { authContext } from '../../../Contexts/AuthContext'
 import { Link } from 'react-router-dom'
 const ModalList = ({item, isUserFollowed}) => {
     const { followUsers, unFollowFunc } = useContext(userContext)

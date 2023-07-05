@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, createContext } from 'react'
+import React, { useEffect, createContext, useState } from 'react'
 import { useContext } from 'react'
 import { authContext } from './AuthContext'
 import { useReducer } from 'react'
@@ -10,6 +10,7 @@ export const postContext = createContext()
 const PostContextWrapper = ({ children }) => {
   const { setauthLoader, userToken } = useContext(authContext)
   const [postState, postDispatch] = useReducer(postReducerFunc, initialPostData)
+  const [editpostModal, seteditpostModal] = useState(false)
 
   const fetchPosts = async () => {
     try {
@@ -232,7 +233,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal ,seteditpostModal}}>{children}</postContext.Provider>
   )
 }
 

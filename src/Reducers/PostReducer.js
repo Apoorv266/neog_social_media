@@ -1,7 +1,7 @@
 export const initialPostData = {
     allPosts: [],
     bookmarkPosts: [],
-    userProfilePosts : [],
+    userProfilePosts: [],
     filterBytrending: false,
     filterByDate: false
 }
@@ -10,6 +10,8 @@ export const initialPostData = {
 export const postReducerFunc = (state, action) => {
     switch (action.type) {
         case "GET_POST":
+            return { ...state, allPosts: action.payload }
+        case "ADD_POST":
             return { ...state, allPosts: action.payload }
         case "TOGGLE_FILTER_TRENDING":
             return { ...state, filterBytrending: !state.filterBytrending, filterByDate: false }
@@ -25,14 +27,14 @@ export const postReducerFunc = (state, action) => {
             return { ...state, bookmarkPosts: action.payload }
         case "ADD_BOOKMARK":
             return { ...state, bookmarkPosts: action.payload }
-            case "REMOVE_BOOKMARK":
+        case "REMOVE_BOOKMARK":
             return { ...state, bookmarkPosts: action.payload }
-            case "ADD_COMMENT":
-                return { ...state, allPosts: action.payload }
-                case "DELETE_COMMENT":
-                    return { ...state, allPosts: action.payload }
+        case "ADD_COMMENT":
+            return { ...state, allPosts: action.payload }
+        case "DELETE_COMMENT":
+            return { ...state, allPosts: action.payload }
         case "ADD_USER_POST":
-                        return { ...state, userProfilePosts: action.payload }
+            return { ...state, userProfilePosts: action.payload }
         default:
             return state
     }

@@ -79,7 +79,7 @@ const UserContextWrapper = ({ children }) => {
   }
 
   const getUserAvatarImg = (currUserName) =>{
-    const obj = userState.allUsers.find((item) => item.username === currUserName)
+    const obj = userState?.allUsers.find((item) => item.username === currUserName)
     return obj.avatarUrl
   }
 

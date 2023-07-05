@@ -8,7 +8,7 @@ import { initialPostData, postReducerFunc } from '../Reducers/PostReducer'
 
 export const postContext = createContext()
 const PostContextWrapper = ({ children }) => {
-  const { setauthLoader, userToken} = useContext(authContext)
+  const { setauthLoader, userToken } = useContext(authContext)
   const [postState, postDispatch] = useReducer(postReducerFunc, initialPostData)
 
   const fetchPosts = async () => {
@@ -46,6 +46,21 @@ const PostContextWrapper = ({ children }) => {
       getbookMarkPosts()
     }, 1000);
   }, [])
+
+
+  const createPostFunc = async (content, mediaURL) => {
+    try {
+      const { status, data: { posts } } = await axios.post("/api/posts",
+        { postData: { content, mediaURL } },
+        { headers: { authorization: userToken } })
+
+      if (status === 201) {
+        postDispatch({ type: "ADD_POST", payload: posts })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // post like
   const likePostFunc = async (postId) => {
@@ -178,9 +193,9 @@ const PostContextWrapper = ({ children }) => {
         data: { posts },
       } = await axios.post(`/api/comments/delete/${postId}/${commentId}`, {}, { headers: { authorization: userToken } })
 
-    if (status === 201) {
-      postDispatch({ type: "DELETE_COMMENT", payload: posts })
-    }
+      if (status === 201) {
+        postDispatch({ type: "DELETE_COMMENT", payload: posts })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -188,16 +203,16 @@ const PostContextWrapper = ({ children }) => {
   }
 
 
-  const getUserPostFunc = async (username) =>{
+  const getUserPostFunc = async (username) => {
     try {
-      const {status , data: {posts}} = await axios.get(`/api/posts/user/${username}`)
+      const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
       if (status === 200) {
         const currPostId = posts.map((item) => item._id)
         postDispatch({ type: "ADD_USER_POST", payload: currPostId })
       }
     } catch (error) {
       console.log(error)
-    }finally{
+    } finally {
       setauthLoader(false)
     }
   }
@@ -217,7 +232,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc }}>{children}</postContext.Provider>
   )
 }
 

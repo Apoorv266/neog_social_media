@@ -49,10 +49,10 @@ const PostContextWrapper = ({ children }) => {
   }, [])
 
 
-  const createPostFunc = async (content, mediaURL) => {
+  const createPostFunc = async (content, mediaURL, mediaAlt) => {
     try {
       const { status, data: { posts } } = await axios.post("/api/posts",
-        { postData: { content, mediaURL } },
+        { postData: { content, mediaURL, mediaAlt } },
         { headers: { authorization: userToken } })
 
       if (status === 201) {
@@ -218,6 +218,25 @@ const PostContextWrapper = ({ children }) => {
     }
   }
 
+  const editPostFunc = async (postId, content, mediaURL, mediaAlt) => {
+    try {
+      const { status, data: { posts } } = await axios.post(`/api/posts/edit/${postId}`,
+      { postData: { content, mediaURL, mediaAlt } },
+      { headers: { authorization: userToken } })
+      if (status === 201) {
+        postDispatch({ type: "EDIT_POST", payload: posts });
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleClickEdit = (postId) => {
+    const { content, mediaAlt , mediaURL} = postState.allPosts.find((item) => item._id === postId)
+    const obj = { content: content, fileTitle: mediaAlt, id: postId, media: null, fileUrl: mediaURL }
+    postDispatch({ type: "POST_CONTENT", payload: obj })
+  }
+
   const isPostLiked = (currPost, userData) => {
     return currPost?.likes.likedBy.find((likeUser) => likeUser.username === userData.username);
   }
@@ -233,7 +252,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal ,seteditpostModal}}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal, seteditpostModal, handleClickEdit, editPostFunc }}>{children}</postContext.Provider>
   )
 }
 

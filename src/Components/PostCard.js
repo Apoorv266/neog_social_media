@@ -30,13 +30,19 @@ const PostCard = ({ item }) => {
     bookmarkFunc,
     removebookmarkFunc,
     isPostBookmarked,
-    seteditpostModal
+    seteditpostModal,
+    handleClickEdit
   } = useContext(postContext);
 
   const mediaTypeFunc = (url) => {
     const extension = url?.split(".")?.pop();
     return extension === "webp" || extension === "jpg"; 
   };
+
+  const handleEditBtn = (id) =>{
+    handleClickEdit(id)
+    seteditpostModal(true)
+  }
 
   return (
     <div className="single-post-main" key={item._id}>
@@ -77,7 +83,7 @@ const PostCard = ({ item }) => {
                 width="20px"
                 onClick={() => deletePostFunc(item._id)}
               />
-              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>seteditpostModal(true)} />
+              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>handleEditBtn(item._id)} />
             </>
           ) : (
             ""

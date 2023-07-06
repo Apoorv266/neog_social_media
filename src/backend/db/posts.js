@@ -11,6 +11,7 @@ export const posts = [
     _id: "xhzTkUi2Nt",
     content: "Nice Weather Today!!",
     mediaURL: "",
+    mediaAlt :"image1", 
     likes: {
       likeCount: 5,
       likedBy: [],
@@ -27,7 +28,7 @@ export const posts = [
         },
       },
     ],
-    username: "romabulani",
+    username: "Alex",
     createdAt: "2022-01-10T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -36,6 +37,7 @@ export const posts = [
     content: "Started my Baking journey! Look what I made.",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/video/upload/v1652188886/upload-socialmedia/oikev6eomsgahnvxcijd.mp4",
+      mediaAlt :"image2",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -51,6 +53,7 @@ export const posts = [
     content: "I made this cake for my friend's birthday. Check it out",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188492/upload-socialmedia/cakegif_q11mfm.webp",
+      mediaAlt :"image3",
     likes: {
       likeCount: 1,
       likedBy: [],
@@ -76,6 +79,7 @@ export const posts = [
     content:
       "You are never too old to set another goal or to dream a new dream.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 5,
       likedBy: [],
@@ -91,6 +95,7 @@ export const posts = [
     content: "Yayy! Its my Birthday Today. Made this cake for myself!",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014336/ecommerce/chocolatecake4.webp",
+      mediaAlt :"image5",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -125,6 +130,7 @@ export const posts = [
     content:
       "Life has got all those twists and turns. You’ve got to hold on tight and off you go.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -139,6 +145,7 @@ export const posts = [
     _id: "G-Gi3lSZP9",
     content: "When you have a dream, you’ve got to grab it and never let go.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -154,6 +161,7 @@ export const posts = [
     content:
       "No matter what people tell you, words and ideas can change the world.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -169,6 +177,7 @@ export const posts = [
     content: "Who's up for Pineapple Pastry?",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014828/ecommerce/pineapplemuffin1.webp",
+      mediaAlt :"image6",
     likes: {
       likeCount: 10,
       likedBy: [],
@@ -185,7 +194,7 @@ export const posts = [
         },
       },
     ],
-    username: "romabulani",
+    username: "Alex",
     createdAt: "2022-04-10T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -194,6 +203,7 @@ export const posts = [
     content:
       "Check out this amazing video from BakinZone https://bakinzone.netlify.app/videos/qtlhdIfojmc",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 1,
       likedBy: [],
@@ -218,6 +228,7 @@ export const posts = [
     _id: "xhzTkUyfNt",
     content: "Believe in yourself! Rest all will fall in place.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -226,7 +237,7 @@ export const posts = [
     comments: [
       {
         _id: "unImWvIzbf",
-        username: "romabulani",
+        username: "Alex",
         commentData: "So True!!",
         votes: {
           upvotedBy: [],
@@ -243,13 +254,14 @@ export const posts = [
     content:
       "You can get everything in life you want if you will just help enough other people get what they want.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 5,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    username: "romabulani",
+    username: "Alex",
     createdAt: "2022-02-10T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -259,6 +271,7 @@ export const posts = [
     content:
       "If you believe something needs to exist, if it's something you want to use yourself, don't let anyone ever stop you from doing it.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 5,
       likedBy: [],
@@ -274,6 +287,7 @@ export const posts = [
     _id: "e-knMEsoLq",
     content: "More is lost by indecision than wrong decision.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 5,
       likedBy: [],
@@ -290,6 +304,7 @@ export const posts = [
     content:
       "The reason we struggle with insecurity is because we compare our behind-the-scenes with everyone else’s highlight reel.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 7,
       likedBy: [],
@@ -305,6 +320,7 @@ export const posts = [
     _id: "l9pedEMjZS",
     content: "If you don’t risk anything, you risk even more.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 6,
       likedBy: [],
@@ -320,13 +336,14 @@ export const posts = [
     _id: "lbW4dlCpNC",
     content: "If it makes you nervous, you’re doing it right.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 12,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    username: "romabulani",
+    username: "Alex",
     createdAt: "2022-04-10T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -336,6 +353,7 @@ export const posts = [
     content:
       "I learned a long time ago that there is something worse than missing the goal, and that’s not pulling the trigger.",
     mediaURL: "",
+    mediaAlt :"Image7",
     likes: {
       likeCount: 9,
       likedBy: [],
@@ -352,6 +370,7 @@ export const posts = [
     content:
       "Success is stumbling from failure to failure with no loss of enthusiasm. Love this quote by Winston Churchill.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 12,
       likedBy: [],
@@ -368,6 +387,7 @@ export const posts = [
     content:
       "Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 8,
       likedBy: [],
@@ -384,13 +404,14 @@ export const posts = [
     content:
       "Life is like riding a bicycle. To keep your balance you must keep moving.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 5,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    username: "romabulani",
+    username: "Alex",
     createdAt: "2022-01-15T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -400,6 +421,7 @@ export const posts = [
     content:
       "“Do not wait for the perfect time and place to enter, for you are already onstage.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 25,
       likedBy: [],
@@ -415,6 +437,7 @@ export const posts = [
     _id: "quiTkUi2Nt",
     content: "It is a rough road that leads to the heights of greatness.",
     mediaURL: "",
+    mediaAlt :"",
     likes: {
       likeCount: 8,
       likedBy: [],

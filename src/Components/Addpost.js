@@ -17,8 +17,12 @@ const Addpost = () => {
   const menuRef = useRef();
 
   const uploadImage = async () => {
-    const res = await uploadMedia(filename);
-    createPostFunc(content, res.url);
+    if (filename) {
+      const res = await uploadMedia(filename);
+      createPostFunc(content, res.url, res.original_filename);
+    }else{
+      createPostFunc(content, "", "");
+    }
     setcontent("");
   };
 
@@ -39,6 +43,10 @@ const Addpost = () => {
       }
     };
     document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   });
 
   return (
@@ -79,43 +87,52 @@ const Addpost = () => {
         </div>
       )}
 
-      <div className="utils-section">
-        <label>
-          <input type="file" className="hidden" onChange={handleUploadInput} />
-          <ImageOutline
-            color={"#ffffff"}
-            height="30px"
-            width="30px"
-            title={"Add image/video/gif"}
-          />
-        </label>
+      <div className="utils-section" ref={menuRef}>
+        {!showPicker ? (
+          <>
+            <label>
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleUploadInput}
+              />
+              <ImageOutline
+                color={"#ffffff"}
+                height="30px"
+                width="30px"
+                title={"Add image/video/gif"}
+              />
+            </label>
 
-        <label>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png"
-            alt=""
-            srcset=""
-            height="30px"
-            width="30px"
-            title={"Add emoji"}
-            onClick={() => setShowPicker((val) => !val)}
-          />
-        </label>
-        <div  ref={menuRef}>
-          {showPicker && (
+            <label>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png"
+                alt=""
+                srcset=""
+                height="30px"
+                width="30px"
+                title={"Add emoji"}
+                onClick={() => setShowPicker((val) => !val)}
+              />
+            </label>
+
+            <button
+              onClick={uploadImage}
+              className="post-btn"
+              disabled={!content.trim() && !filename}
+            >
+              Post
+            </button>
+          </>
+        ) : (
+          <div >
             <Picker
               pickerStyle={{ width: "100%" }}
               onEmojiClick={onEmojiClick}
+              theme="dark"
             />
-          )}
-        </div>
-        <button
-          onClick={uploadImage}
-          className="post-btn"
-          disabled={!content.trim() && !filename}
-        >
-          Post
-        </button>
+          </div>
+        )}
       </div>
     </div>
   );

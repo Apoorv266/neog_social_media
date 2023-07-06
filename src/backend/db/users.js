@@ -15,7 +15,7 @@ export const users = [
     bio: "Be yourself!",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://Alex .netlify.app/",
     createdAt: "2022-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -41,7 +41,7 @@ export const users = [
     bio: "Whats in bio?",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651554256/socialmedia/avatars/jane-doe_il3cvx.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://Alex .netlify.app/",
     createdAt: "2022-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -61,14 +61,14 @@ export const users = [
 
   {
     _id: "o5gzWjEeX_",
-    firstName: "Roma",
-    lastName: "Bulani",
-    username: "romabulani",
-    password: "romabulani123",
+    firstName: "Alex",
+    lastName: "Chop",
+    username: "Alex ",
+    password: "Alex123",
     bio: "Aspiring Frontend Engineer",
     avatarUrl:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525370/socialmedia/avatars/roma.webp",
-    website: "https://romabulani.hashnode.dev/",
+      "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+    website: "https://Alex .hashnode.dev/",
     createdAt: "2022-01-04T10:55:06+05:30",
     updatedAt: formatDate(),
     following:[{
@@ -93,7 +93,7 @@ export const users = [
       bio: "Be yourself!",
       avatarUrl:
         "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
-      website: "https://romabulani.netlify.app/",
+      website: "https://Alex .netlify.app/",
       createdAt: "2022-01-01T10:55:06+05:30",
       updatedAt: formatDate(),
     }

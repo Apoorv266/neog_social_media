@@ -27,7 +27,6 @@ const EditPostModal = () => {
   };
 
   const handleUploadInput = (e) => {
-    console.log(e.target.files[0])
     postDispatch({ type: "ADD_POST_MEDIA", payload: e.target.files[0] })
     e.target.value = "";
   };

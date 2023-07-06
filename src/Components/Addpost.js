@@ -1,15 +1,20 @@
-import React from "react";
-import { useState } from "react";
-import { uploadMedia } from "../MediaUpload/Media";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { postContext } from "../Contexts/PostContext";
-import { ImageOutline, CloseCircleOutline } from "react-ionicons";
 import { authContext } from "../Contexts/AuthContext";
+import { uploadMedia } from "../MediaUpload/Media";
+import { ImageOutline, CloseCircleOutline } from "react-ionicons";
+import Picker from "emoji-picker-react";
+import { useEffect } from "react";
+import { useRef } from "react";
+
 const Addpost = () => {
   const [content, setcontent] = useState("");
-  const [filename, setFilename] = useState('');
+  const [filename, setFilename] = useState("");
   const { createPostFunc } = useContext(postContext);
   const { userData } = useContext(authContext);
+  const [showPicker, setShowPicker] = useState(false);
+  const menuRef = useRef();
 
   const uploadImage = async () => {
     const res = await uploadMedia(filename);
@@ -17,10 +22,24 @@ const Addpost = () => {
     setcontent("");
   };
 
-  const handleUploadInput = (e) =>{
-    setFilename(e.target.files[0])
-    e.target.value = ''
-  }
+  const handleUploadInput = (e) => {
+    setFilename(e.target.files[0]);
+    e.target.value = "";
+  };
+
+  const onEmojiClick = (emojiObject) => {
+    setcontent((prevInput) => prevInput + emojiObject.emoji);
+    setShowPicker(false);
+  };
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setShowPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+  });
 
   return (
     <div className="post-card-wrapper">
@@ -47,18 +66,22 @@ const Addpost = () => {
           onChange={(e) => setcontent(e.target.value)}
         ></textarea>
       </div>
-      {filename && <div className="media-title">
-        <p>{filename?.name?.slice(0, 70)}...</p>{" "}
-        <CloseCircleOutline color={"#000000"} height="20px" width="20px" className="close-btn" onClick={()=>setFilename('')}/>
-      </div>}
+      {filename && (
+        <div className="media-title">
+          <p>{filename?.name?.slice(0, 70)}...</p>{" "}
+          <CloseCircleOutline
+            color={"#000000"}
+            height="20px"
+            width="20px"
+            className="close-btn"
+            onClick={() => setFilename("")}
+          />
+        </div>
+      )}
 
       <div className="utils-section">
         <label>
-          <input
-            type="file"
-            className="hidden"
-            onChange={handleUploadInput}
-          />
+          <input type="file" className="hidden" onChange={handleUploadInput} />
           <ImageOutline
             color={"#ffffff"}
             height="30px"
@@ -75,13 +98,21 @@ const Addpost = () => {
             height="30px"
             width="30px"
             title={"Add emoji"}
+            onClick={() => setShowPicker((val) => !val)}
           />
         </label>
+        <div  ref={menuRef}>
+          {showPicker && (
+            <Picker
+              pickerStyle={{ width: "100%" }}
+              onEmojiClick={onEmojiClick}
+            />
+          )}
+        </div>
         <button
           onClick={uploadImage}
           className="post-btn"
           disabled={!content.trim() && !filename}
-          
         >
           Post
         </button>

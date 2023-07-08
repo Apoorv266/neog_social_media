@@ -52,7 +52,7 @@ const PostCard = ({ item }) => {
         <div className="user-Details">
           <div className="post-details">
             <img
-              src={getUserAvatarImg(item?.username)}
+              src={userData?.username === item?.username ? userData?.avatarUrl : getUserAvatarImg(item?.username)}
               alt=""
               srcSet=""
               width={"50px"}

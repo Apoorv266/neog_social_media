@@ -3,6 +3,7 @@ import "../../../Styles/EditProfileModal.css";
 import { useState } from "react";
 import { authContext } from "../../../Contexts/AuthContext";
 import { userContext } from "../../../Contexts/UserContext";
+import AvatarModal from "../AvatarModal/AvatarModal";
 
 const EditProfileModal = ({ seteditModal }) => {
   const { userData } = useContext(authContext);
@@ -14,10 +15,11 @@ const EditProfileModal = ({ seteditModal }) => {
     lastName: lastName,
     bio: bio,
     website: website,
-    backgroundImage:backgroundImage,
+    backgroundImage: backgroundImage,
     avatarUrl: avatarUrl,
   };
   const [editInputField, seteditInputField] = useState(inputState);
+  const [avatarModal, setavatarModal] = useState(false)
 
   const editInputFunc = (e) => {
     const { name, value } = e.target;
@@ -38,7 +40,6 @@ const EditProfileModal = ({ seteditModal }) => {
     handleEditUserFunc(editInputField);
     seteditInputField(inputState);
     seteditModal(false);
-    console.log("editInputField",editInputField)
   };
   return (
     <div id="myModal" className="modal">
@@ -70,29 +71,62 @@ const EditProfileModal = ({ seteditModal }) => {
             />
           </label>
 
-          <h3>Edit profile image : </h3>
-          <label>
-            <input
-              type="file"
-              className="hidden"
-              name="avatarUrl"
-              onChange={editInputFunc}
-            />
-            <img
-              src={
-                editInputField.avatarUrl 
-              }
-              alt=""
-              srcset=""
-              width={"90px"}
-              height={"90px"}
-              style={{
-                borderRadius: "50%",
-                backgroundSize: "cover",
-                objectFit: "cover",
-              }}
-            />
-          </label>
+
+
+          <div className="user-edit-image">
+
+
+            <section>
+              <h4>Edit profile image : </h4>
+              <label>
+                <input
+                  type="file"
+                  className="hidden"
+                  name="avatarUrl"
+                  onChange={editInputFunc}
+                />
+                <img
+                  src={
+                    editInputField.avatarUrl
+                  }
+                  alt=""
+                  srcset=""
+                  width={"90px"}
+                  height={"90px"}
+                  style={{
+                    borderRadius: "50%",
+                    backgroundSize: "cover",
+                    objectFit: "cover",
+                  }}
+                />
+              </label></section>
+
+
+
+
+            <section>
+              <h4>Add avatar : </h4>
+              <label>
+                <img
+                  src={
+                    editInputField.avatarUrl
+                  }
+                  alt=""
+                  srcset=""
+                  width={"90px"}
+                  height={"90px"}
+                  style={{
+                    borderRadius: "50%",
+                    backgroundSize: "cover",
+                    objectFit: "cover",
+                  }}
+                  onClick={()=>setavatarModal(true)}
+                />
+              </label>
+              {avatarModal && <AvatarModal setavatarModal={setavatarModal} editInputField={editInputField} seteditInputField={seteditInputField}/>}
+            </section>
+          </div>
+
 
           <h3>First Name : </h3>
           <input

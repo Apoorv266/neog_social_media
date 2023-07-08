@@ -11,6 +11,7 @@ const AuthContextWrapper = ({ children }) => {
     const [userToken, setuserToken] = useState(storageToken)
     const [loader, setloader] = useState(false)
     const [authLoader, setauthLoader] = useState(false)
+    
     const navigate = useNavigate()
     const location = useLocation()
     const followUserList = userData?.following.reduce((acc, curr) => [...acc, curr.username], [])
@@ -69,8 +70,7 @@ const AuthContextWrapper = ({ children }) => {
         setloader(true);
         setuserToken(null);
         setuserData(null);
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
+        localStorage.clear()
         setTimeout(() => {
             setloader(false);
             navigate("/login")

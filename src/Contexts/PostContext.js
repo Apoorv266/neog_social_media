@@ -42,10 +42,10 @@ const PostContextWrapper = ({ children }) => {
   }
   useEffect(() => {
     setauthLoader(true)
-    setTimeout(() => {
-      fetchPosts()
-      getbookMarkPosts()
-    }, 1000);
+      setTimeout(() => {
+        fetchPosts()
+        getbookMarkPosts()
+      }, 1000);
   }, [])
 
 
@@ -230,6 +230,8 @@ const PostContextWrapper = ({ children }) => {
       console.log(error)
     }
   }
+
+ 
 
   const handleClickEdit = (postId) => {
     const { content, mediaAlt , mediaURL} = postState.allPosts.find((item) => item._id === postId)

@@ -34,9 +34,11 @@ const PostCard = ({ item }) => {
     handleClickEdit
   } = useContext(postContext);
 
+
+  const extensionData = ["webp", "jpg", "gif", "jpeg"]
   const mediaTypeFunc = (url) => {
     const extension = url?.split(".")?.pop();
-    return extension === "webp" || extension === "jpg"; 
+    return extensionData.includes(extension)
   };
 
   const handleEditBtn = (id) =>{
@@ -45,12 +47,12 @@ const PostCard = ({ item }) => {
   }
 
   return (
-    <div className="single-post-main" key={item._id}>
+    <div className="single-post-main" key={item?._id}>
       <div className="single-card-wrapper">
         <div className="user-Details">
           <div className="post-details">
             <img
-              src={getUserAvatarImg(item.username)}
+              src={getUserAvatarImg(item?.username)}
               alt=""
               srcSet=""
               width={"50px"}
@@ -65,25 +67,25 @@ const PostCard = ({ item }) => {
 
           <div className="user-post-details">
             <Link
-              to={`/profile/${item.username}`}
+              to={`/profile/${item?.username}`}
               style={{ textDecoration: "none" }}
             >
-              <p>{item.username}</p>
+              <p>{item?.username}</p>
             </Link>
-            <p style={{ color: "lightgray" }}>{item.createdAt.slice(0, 10)}</p>
+            <p style={{ color: "lightgray" }}>{item?.createdAt.slice(0, 10)}</p>
           </div>
         </div>
 
         <div className="utils-icons">
-          {userData.username === item.username ? (
+          {userData?.username === item?.username ? (
             <>
               <TrashOutline
                 color={"#ffffff"}
                 height="20px"
                 width="20px"
-                onClick={() => deletePostFunc(item._id)}
+                onClick={() => deletePostFunc(item?._id)}
               />
-              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>handleEditBtn(item._id)} />
+              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>handleEditBtn(item?._id)} />
             </>
           ) : (
             ""
@@ -92,15 +94,15 @@ const PostCard = ({ item }) => {
       </div>
 
       <div className="post-data">
-        <Link to={`/post/${item._id}`} style={{ textDecoration: "none" }}>
-          <p>{item.content}</p>
+        <Link to={`/post/${item?._id}`} style={{ textDecoration: "none" }}>
+          <p>{item?.content}</p>
         </Link>
-        {item.mediaURL ? (
-          mediaTypeFunc(item.mediaURL) ? (
-            <img src={item.mediaURL} alt="" srcset="" width={"550px"} />
+        {item?.mediaURL ? (
+          mediaTypeFunc(item?.mediaURL) ? (
+            <img src={item?.mediaURL} alt="" srcset="" width={"550px"} />
           ) : (
             <video width="550" controls>
-              <source src={item.mediaURL} type="video/mp4" />
+              <source src={item?.mediaURL} type="video/mp4" />
             </video>
           )
         ) : (
@@ -117,11 +119,11 @@ const PostCard = ({ item }) => {
               color={"white"}
               height="30px"
               width="30px"
-              onClick={() => likePostFunc(item._id)}
+              onClick={() => likePostFunc(item?._id)}
             />
           )}
           <span className="likes">
-            <p>{item.likes.likeCount}</p>
+            <p>{item?.likes.likeCount}</p>
           </span>
         </span>
 
@@ -132,26 +134,26 @@ const PostCard = ({ item }) => {
             color={"white"}
             height="30px"
             width="30px"
-            onClick={() => dislikePostFunc(item._id)}
+            onClick={() => dislikePostFunc(item?._id)}
           />
         )}
         <ChatboxEllipsesOutline color={"white"} height="30px" width="30px" />
 
         <ShareSocialOutline color={"white"} height="30px" width="30px" />
 
-        {isPostBookmarked(item._id) ? (
+        {isPostBookmarked(item?._id) ? (
           <Bookmark
             color={"white"}
             height="30px"
             width="30px"
-            onClick={() => removebookmarkFunc(item._id)}
+            onClick={() => removebookmarkFunc(item?._id)}
           />
         ) : (
           <BookmarkOutline
             color={"white"}
             height="30px"
             width="30px"
-            onClick={() => bookmarkFunc(item._id)}
+            onClick={() => bookmarkFunc(item?._id)}
           />
         )}
       </div>

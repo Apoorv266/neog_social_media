@@ -5,9 +5,10 @@ import { authContext } from "../../Contexts/AuthContext";
 import { userContext } from "../../Contexts/UserContext";
 import Modal from "../Modal/FollowListModal/Modal";
 import { useState } from "react";
+import EditProfileModal from "../Modal/EditProfileModal/EditProfileModal";
 
 const UserDetails = ({ userProfileData, postLen }) => {
-  const { followers, following, bio, firstName, lastName, username, website, createdAt, avatarUrl, _id } = userProfileData
+  const { followers, following, bio, firstName, lastName, username, website, createdAt, avatarUrl, _id, backgroundImage } = userProfileData
   const { userData } = useContext(authContext)
   const { followUsers, unFollowFunc } = useContext(userContext)
   const [followModal, setfollowModal] = useState({
@@ -15,6 +16,7 @@ const UserDetails = ({ userProfileData, postLen }) => {
     data: [],
     title: ""
   })
+  const [editModal, seteditModal] = useState(false)
 
   const isUserFollowed = (username) => {
     const followedUser = userData.following.find(item => item.username === username)
@@ -22,13 +24,19 @@ const UserDetails = ({ userProfileData, postLen }) => {
   }
   return (
     <>
+        <img src={backgroundImage} alt="" srcset="" width={"100%"}
+          height={"200px"}
+          style={{
+            backgroundSize: "cover",
+            objectFit: "cover",
+          }}/>
       <div className="main-details">
         <img
           src={`${avatarUrl}`}
           alt=""
           srcSet=""
-          width={"70px"}
-          height={"70px"}
+          width={"90px"}
+          height={"90px"}
           style={{
             borderRadius: "50%",
             backgroundSize: "cover",
@@ -42,7 +50,7 @@ const UserDetails = ({ userProfileData, postLen }) => {
           <p><strong>Site : </strong><a href={website} target="_blank">{website}</a></p>
           <p><strong>Joined on :</strong> {createdAt?.slice(0, 10)}</p>
         </div>
-        {userData.username === username ? <button className="edt-profile-btn">Edit profile</button> : isUserFollowed(username) ? <button className="edt-profile-btn" onClick={() => unFollowFunc(_id)}>Unfollow</button> : <button className="edt-profile-btn" onClick={() => followUsers(_id)}>Follow</button>}
+        {userData.username === username ? <button className="edt-profile-btn" onClick={()=>seteditModal(true)}>Edit profile</button> : isUserFollowed(username) ? <button className="edt-profile-btn" onClick={() => unFollowFunc(_id)}>Unfollow</button> : <button className="edt-profile-btn" onClick={() => followUsers(_id)}>Follow</button>}
       </div>
 
       <div className="stats-main">
@@ -64,6 +72,7 @@ const UserDetails = ({ userProfileData, postLen }) => {
 
       </div>
       {followModal.open && <Modal modalData={followModal} setfollowModal={setfollowModal} isUserFollowed={isUserFollowed}/>}
+      {editModal && <EditProfileModal seteditModal={seteditModal}/>}
     </>
   );
 };

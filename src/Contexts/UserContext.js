@@ -78,10 +78,31 @@ const UserContextWrapper = ({ children }) => {
     }
   }
 
+  const handleEditUserFunc  = async (editInputField) =>{
+    try {
+      const {firstName, lastName, bio, website, backgroundImage, avatarUrl} = editInputField
+      const {
+        status,
+        data: { user },
+      }  =  await axios.post(
+        "/api/users/edit",
+        { userData: {firstName,lastName, bio, website,backgroundImage,  avatarUrl } },
+        { headers: { authorization: userToken } })
+    
+        if (status === 201) {
+          setuserData(user)
+          localStorage.setItem("user", JSON.stringify(user))
+        }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const getUserAvatarImg = (currUserName) =>{
     const obj = userState?.allUsers.find((item) => item.username === currUserName)
     return obj?.avatarUrl
   }
+
 
 
   const filterUserFunc = () =>{
@@ -90,7 +111,7 @@ const UserContextWrapper = ({ children }) => {
   }
 
   return (
-    <userContext.Provider value={{ userState,unFollowFunc , followUsers, getUserAvatarImg , getUserDetailsFunc,userSearchField , setuserSearchField, filterUserFunc }}>{children}</userContext.Provider>
+    <userContext.Provider value={{ userState,unFollowFunc , followUsers, getUserAvatarImg , getUserDetailsFunc,userSearchField , setuserSearchField, filterUserFunc, handleEditUserFunc }}>{children}</userContext.Provider>
   )
 }
 

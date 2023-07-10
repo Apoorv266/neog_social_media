@@ -9,6 +9,8 @@ import Explore from './Explore'
 import Bookmarks from './Bookmarks'
 import Profile from './Profile/Profile'
 import SinglePost from './SinglePost';
+import { ToastContainer } from 'react-toastify'
+import { ToastView } from './ToastComponent/ToastContainer'
 
 const Home = () => {
     const [showFilter, setshowFilter] = useState(true)
@@ -25,6 +27,7 @@ const Home = () => {
                     <Route path="/post/:postId" element={<SinglePost />} />
                 </Routes>
                 <RightBar showFilter={showFilter}/>
+                <ToastView />
             </div>
         </>
     )

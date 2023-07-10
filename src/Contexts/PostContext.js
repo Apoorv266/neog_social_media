@@ -1,16 +1,30 @@
 import axios from 'axios'
-import React, { useEffect, createContext } from 'react'
+import React, { useEffect, createContext, useState } from 'react'
 import { useContext } from 'react'
 import { authContext } from './AuthContext'
 import { useReducer } from 'react'
 import { initialPostData, postReducerFunc } from '../Reducers/PostReducer'
+import { ToastError, ToastSuccess } from '../Components/ToastComponent/ToastContainer'
 
 
+const getPostData = () =>{
+  const postState= JSON.parse(localStorage.getItem("postState"))
+  if (postState) {
+    return JSON.parse(localStorage.getItem("postState"))
+  }else{
+    return initialPostData
+  }
+}
 export const postContext = createContext()
 const PostContextWrapper = ({ children }) => {
-  const { setauthLoader, userToken} = useContext(authContext)
-  const [postState, postDispatch] = useReducer(postReducerFunc, initialPostData)
+  const { setauthLoader, userToken } = useContext(authContext)
+  const [postState, postDispatch] = useReducer(postReducerFunc, getPostData())
+  const [editpostModal, seteditpostModal] = useState(false)
 
+  useEffect(() => {
+  localStorage.setItem("postState", JSON.stringify(postState))
+  }, [postState])
+  
   const fetchPosts = async () => {
     try {
       const { data: { posts }, status } = await axios.get("api/posts")
@@ -35,17 +49,35 @@ const PostContextWrapper = ({ children }) => {
         postDispatch({ type: "GET_BOOKMARK", payload: bookmarks })
       }
     } catch (error) {
-      console.log("bookmark", error)
+      ToastError("Some error occured !")
     }
 
   }
   useEffect(() => {
     setauthLoader(true)
-    setTimeout(() => {
-      fetchPosts()
-      getbookMarkPosts()
-    }, 1000);
-  }, [])
+      setTimeout(() => {
+        fetchPosts()
+        if (userToken) {
+          getbookMarkPosts()
+        }
+      }, 1000);
+  }, [userToken])
+
+
+  const createPostFunc = async (content, mediaURL, mediaAlt) => {
+    try {
+      const { status, data: { posts } } = await axios.post("/api/posts",
+        { postData: { content, mediaURL, mediaAlt } },
+        { headers: { authorization: userToken } })
+
+      if (status === 201) {
+        postDispatch({ type: "ADD_POST", payload: posts })
+        ToastSuccess("Post successfully created !")
+      }
+    } catch (error) {
+      ToastError("Some error occured !")
+    }
+  }
 
   // post like
   const likePostFunc = async (postId) => {
@@ -63,9 +95,10 @@ const PostContextWrapper = ({ children }) => {
 
       if (status === 201) {
         postDispatch({ type: "LIKE_POST", payload: posts })
+        ToastSuccess("Post liked successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -85,6 +118,7 @@ const PostContextWrapper = ({ children }) => {
 
       if (status === 201) {
         postDispatch({ type: "DISLIKE_POST", payload: posts })
+        ToastSuccess("Post disliked successfully !")
       }
     } catch (error) {
       const {
@@ -92,10 +126,10 @@ const PostContextWrapper = ({ children }) => {
       } = error;
 
       if (status === 400) {
-        console.log("Post must have atleast 1 like!")
+        ToastError("Post must have atleast 1 like!")
       }
       else {
-        console.log(error)
+        ToastError("Some error occured !")
       }
     }
 
@@ -113,9 +147,10 @@ const PostContextWrapper = ({ children }) => {
 
       if (status === 201) {
         postDispatch({ type: "DELETE_POST", payload: posts })
+        ToastSuccess("Post deleted successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -129,9 +164,10 @@ const PostContextWrapper = ({ children }) => {
         })
       if (status === 200) {
         postDispatch({ type: "ADD_BOOKMARK", payload: bookmarks })
+        ToastSuccess("Post bookmarked successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -146,9 +182,10 @@ const PostContextWrapper = ({ children }) => {
         })
       if (status === 200) {
         postDispatch({ type: "REMOVE_BOOKMARK", payload: bookmarks })
+        ToastSuccess("Bookmark removed successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -164,9 +201,10 @@ const PostContextWrapper = ({ children }) => {
       );
       if (status === 201) {
         postDispatch({ type: "ADD_COMMENT", payload: posts })
+        ToastSuccess("Comment added successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -178,28 +216,51 @@ const PostContextWrapper = ({ children }) => {
         data: { posts },
       } = await axios.post(`/api/comments/delete/${postId}/${commentId}`, {}, { headers: { authorization: userToken } })
 
-    if (status === 201) {
-      postDispatch({ type: "DELETE_COMMENT", payload: posts })
-    }
+      if (status === 201) {
+        postDispatch({ type: "DELETE_COMMENT", payload: posts })
+        ToastSuccess("Comment deleted successfully !")
+      }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
 
   }
 
 
-  const getUserPostFunc = async (username) =>{
+  const getUserPostFunc = async (username) => {
     try {
-      const {status , data: {posts}} = await axios.get(`/api/posts/user/${username}`)
+      const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
       if (status === 200) {
         const currPostId = posts.map((item) => item._id)
         postDispatch({ type: "ADD_USER_POST", payload: currPostId })
       }
     } catch (error) {
-      console.log(error)
-    }finally{
+      ToastError("Some error occured !")
+    } finally {
       setauthLoader(false)
     }
+  }
+
+  const editPostFunc = async (postId, content, mediaURL, mediaAlt) => {
+    try {
+      const { status, data: { posts } } = await axios.post(`/api/posts/edit/${postId}`,
+      { postData: { content, mediaURL, mediaAlt } },
+      { headers: { authorization: userToken } })
+      if (status === 201) {
+        postDispatch({ type: "EDIT_POST", payload: posts });
+        ToastSuccess("Post updated successfully !")
+      }
+    } catch (error) {
+      ToastError("Some error occured !")
+    }
+  }
+
+ 
+
+  const handleClickEdit = (postId) => {
+    const { content, mediaAlt , mediaURL} = postState.allPosts.find((item) => item._id === postId)
+    const obj = { content: content, fileTitle: mediaAlt, id: postId, media: null, fileUrl: mediaURL }
+    postDispatch({ type: "POST_CONTENT", payload: obj })
   }
 
   const isPostLiked = (currPost, userData) => {
@@ -217,7 +278,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal, seteditpostModal, handleClickEdit, editPostFunc }}>{children}</postContext.Provider>
   )
 }
 

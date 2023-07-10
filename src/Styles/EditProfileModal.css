@@ -1,0 +1,39 @@
+#input{
+    width: 95%;
+  height: 35px;
+  border-radius: 20px;
+  border: 2px solid var(--border-color);
+  padding: 10px;
+  background-color: var(--utils-color);
+  color: white;
+}
+
+.edit-modal{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.save-btn{
+    height: 30px;
+    width: 200px;
+    background-color: var(--utils-color);
+    border:none;
+    color: white;
+    font-size: 17px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.user-edit-image{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 20px 0 20px 0;
+}

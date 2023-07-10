@@ -8,14 +8,14 @@ const SideNavbar = ({setshowFilter}) => {
     const { handleLogout } = useContext(authContext)
     let navigate = useNavigate();
 
-    const routeFunc = (str, value) => {
-        navigate(`${str}`)
+    const routeFunc = (url, value) => {
+        navigate(`${url}`)
         setshowFilter(value)
     }
     return (
         <div className='sideNav-main'>
             <p onClick={() => routeFunc("/", true)} className="nav-link">Home</p>
-            <p onClick={() => routeFunc("/explore", false)} className="nav-link">Explore</p>
+            <p onClick={() => routeFunc("/explore", true)} className="nav-link">Explore</p>
             <p onClick={() => routeFunc("/bookmarks", false)}  className="nav-link">Bookmark</p>
             <p onClick={() => routeFunc("/profile/adarshbalika", false)} className="nav-link">Profile</p>
             <button className='logout-btn' onClick={handleLogout}>Logout</button>

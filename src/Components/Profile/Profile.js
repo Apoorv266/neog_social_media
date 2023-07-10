@@ -13,9 +13,9 @@ const Profile = () => {
     const { postState , getUserPostFunc} = useContext(postContext);
     const {userState, getUserDetailsFunc} = useContext(userContext);
     const {userData, authLoader, setauthLoader} = useContext(authContext)
-
   
-    const userProfileData = userState?.allUsers.find((item) => item.username === username)
+    const userProfileData =userData?.username === username  ? userData : userState?.allUsers.find((item) => item.username === username)
+
 
     useEffect(() => {
         setauthLoader(true)
@@ -25,7 +25,6 @@ const Profile = () => {
         }, 500);
     }, [userData, username])
  
-
     
     return (
         <div className="post-container">
@@ -37,20 +36,13 @@ const Profile = () => {
         ) : (
           <>
              
-             <UserDetails  userProfileData={userState.profileUser} postLen = {postState?.userProfilePosts}/>
+             <UserDetails  userProfileData={userState?.profileUser} postLen = {postState?.userProfilePosts}/>
             {postState?.userProfilePosts?.map((item) => {
                 const currPost = postState?.allPosts?.find(({_id}) => _id === item)
               return <PostCard item={currPost} />;
             })}
           </>
         )}
-
-
-
-
-
-
-
 
         </div>
     )

@@ -3,7 +3,7 @@ import "../Styles/Navbar.css"
 const Navbar = () => {
   return (
     <div className='navbar-wrapper'>
-        <h1>ChatMate</h1>
+        <img src={require("../Images/logo.png")} alt="" srcset="" width={"300px"}/>
     </div>
   )
 }

@@ -92,9 +92,9 @@ export const posts = [
   },
   {
     _id: "3XHvLP9kC",
-    content: "Japan is my dream destination !",
-    mediaURL:
-      "https://cdn.pixabay.com/photo/2015/06/29/04/41/tokyo-tower-825196_1280.jpg",
+    content:
+    "Comment where do you live? Iam waiting",
+  mediaURL: "",
       mediaAlt :"image5",
     likes: {
       likeCount: 2,
@@ -143,8 +143,9 @@ export const posts = [
   },
   {
     _id: "G-Gi3lSZP9",
-    content: "Anyone up for a movie ? Lets plan together !",
-    mediaURL: "",
+    content: "Japan is my dream destination !",
+    mediaURL:
+      "https://cdn.pixabay.com/photo/2015/06/29/04/41/tokyo-tower-825196_1280.jpg",
     mediaAlt :"",
     likes: {
       likeCount: 2,
@@ -158,9 +159,8 @@ export const posts = [
   },
   {
     _id: "GeMUAdi9mh",
-    content:
-      "Comment where do you live? Iam waiting",
-    mediaURL: "",
+    content: "Anyone up for a movie ? Lets plan together !",
+    mediaURL: "https://media.tenor.com/OlmWTIz9-skAAAAC/movie-night.gif",
     mediaAlt :"",
     likes: {
       likeCount: 2,

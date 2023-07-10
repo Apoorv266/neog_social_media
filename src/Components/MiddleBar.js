@@ -9,7 +9,7 @@ import EditPostModal from "./Modal/EditPostModal/EditPostModal";
 const MiddleBar = () => {
   const {filterByDate, editpostModal} = useContext(postContext);
   const { authLoader,followUserList, userData } = useContext(authContext);
-  const dispPost = filterByDate?.filter((item) => followUserList?.includes(item.username) || item.username === userData?.username)
+  const dispPost = filterByDate?.filter((item) => followUserList?.includes(item.username) || item.username === userData?.username).reverse()
   return (
     <>
       <div className="post-container">
@@ -20,9 +20,9 @@ const MiddleBar = () => {
           </div>
         ) : (
           <>
-            {dispPost?.map((item) => {
+            {dispPost.length > 0 ? dispPost?.map((item) => {
               return <PostCard item={item} />;
-            })}
+            }) : <h1 className="empty-txt">No posts to display !</h1>}
           </>
         )}
       </div>

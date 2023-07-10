@@ -36,7 +36,7 @@ const PostCard = ({ item }) => {
   } = useContext(postContext);
 
 
-  const extensionData = ["webp", "jpg", "gif", "jpeg"]
+  const extensionData = ["webp", "jpg", "gif", "jpeg" , "png"]
   const mediaTypeFunc = (url) => {
     const extension = url?.split(".")?.pop();
     return extensionData.includes(extension)
@@ -94,10 +94,10 @@ const PostCard = ({ item }) => {
         </div>
       </div>
 
-      <div className="post-data">
         <Link to={`/post/${item?._id}`} style={{ textDecoration: "none" }}>
-          <p>{item?.content}</p>
-        </Link>
+      <div className="post-data">
+          <p className="post-content">{item?.content}</p>
+        
         {item?.mediaURL ? (
           mediaTypeFunc(item?.mediaURL) ? (
             <img src={item?.mediaURL} alt="" srcset="" width={"550px"} />
@@ -110,7 +110,8 @@ const PostCard = ({ item }) => {
           ""
         )}
       </div>
-
+      </Link>
+      
       <div className="post-icons">
         <span className="likes-card">
           {isPostLiked(item, userData) ? (

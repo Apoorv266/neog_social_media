@@ -4,4 +4,7 @@
   border-bottom: 2px solid var(--border-color);
   text-align: center;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

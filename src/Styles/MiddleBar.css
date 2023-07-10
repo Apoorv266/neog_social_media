@@ -3,6 +3,7 @@
   width: 50%;
   border-left: 2px solid var(--border-color);
   border-right: 2px solid var(--border-color);
+  text-align: center;
 }
 .post-card-wrapper {
   display: flex;
@@ -74,4 +75,10 @@
 .media-title .close-btn {
   margin-top: 2px;
   padding-right: 5px;
+}
+
+
+.empty-txt{
+  color: white;
+  margin-top: 50px;
 }

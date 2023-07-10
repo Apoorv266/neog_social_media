@@ -39,10 +39,10 @@ const Profile = () => {
           <>
              
              <UserDetails  userProfileData={profileDetails} postLen = {postState?.userProfilePosts}/>
-            {postState?.userProfilePosts?.map((item) => {
+            {postState?.userProfilePosts.length > 0 ?postState?.userProfilePosts?.map((item) => {
                 const currPost = postState?.allPosts?.find(({_id}) => _id === item)
               return <PostCard item={currPost} />;
-            })}
+            }) : <h1 className="empty-txt">No posts to display !</h1>}
           </>
         )}
 

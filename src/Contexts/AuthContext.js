@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { createContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { ToastError, ToastSuccess } from '../Components/ToastComponent/ToastContainer'
 
 export const authContext = createContext()
 const AuthContextWrapper = ({ children }) => {
@@ -24,6 +25,7 @@ const AuthContextWrapper = ({ children }) => {
                 password
             })
             if (status === 200 || status === 201) {
+                ToastSuccess("Sign In successfully !")
                 setuserData(foundUser)
                 setuserToken(encodedToken)
                 localStorage.setItem("token", JSON.stringify(encodedToken))
@@ -36,9 +38,10 @@ const AuthContextWrapper = ({ children }) => {
                     }
                     setloader(false)
                 }, 2000);
+               
             }
         } catch (error) {
-            console.log(error)
+            ToastError("Some error occured !")
         }
     }
 
@@ -52,6 +55,7 @@ const AuthContextWrapper = ({ children }) => {
             })
 
             if (status === 200 || status === 201) {
+                ToastSuccess("Signup successfully !")
                 setuserData(createdUser)
                 setuserToken(encodedToken)
                 localStorage.setItem("token", JSON.stringify(encodedToken))
@@ -60,21 +64,25 @@ const AuthContextWrapper = ({ children }) => {
                     navigate("/");
                     setloader(false)
                 }, 1000);
+            
             }
         } catch (error) {
-            console.log(error)
+            ToastError("Some error occured !")
         }
     }
 
     const handleLogout = () => {
-        setloader(true);
         setuserToken(null);
         setuserData(null);
         localStorage.clear()
         setTimeout(() => {
-            setloader(false);
+            setloader(true);
             navigate("/login")
-        }, 2000);
+        }, 1000);
+        setTimeout(() => {
+            ToastSuccess("Logged Out successfully !")
+            setloader(false);
+        }, 1500);
     }
     return (
         <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc, setauthLoader, authLoader, followUserList ,setuserData}}>{children}</authContext.Provider>

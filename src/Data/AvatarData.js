@@ -20,6 +20,6 @@ export const avatarData = [
 
     , 
     {id : 6, 
-    url : "https://static.vecteezy.com/system/resources/previews/004/219/780/original/young-man-with-beard-avatar-character-free-vector.jpg"
+    url : "https://img.freepik.com/premium-vector/young-man-avatar-character-vector-illustration-design_24877-18514.jpg"
     }
 ]

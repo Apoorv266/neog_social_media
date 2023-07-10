@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { postContext } from '../../../Contexts/PostContext'
 import { ImageOutline, CloseCircleOutline } from "react-ionicons";
 import Picker from "emoji-picker-react";
-import { uploadMedia } from '../../../MediaUpload/Media';
+import { uploadMedia } from '../../../Utils/Media';
 
 const EditPostModal = () => {
   const { seteditpostModal, postState , postDispatch, editPostFunc} = useContext(postContext)

@@ -2,6 +2,7 @@ import React, { useState ,useContext} from "react";
 import "../Styles/Login.css"
 import { Link } from "react-router-dom";
 import { authContext } from "../Contexts/AuthContext";
+import { ToastView } from "../Components/ToastComponent/ToastContainer";
 
 
 const Login = () => {
@@ -44,6 +45,7 @@ const Login = () => {
         <p>login for first time? <Link to={"/signup"} className="auth-link" >Sign up Here
         </Link></p>
       </div>
+      <ToastView />
     </div>
   );
 };

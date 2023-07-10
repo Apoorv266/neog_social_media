@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
-import { uploadMedia } from "../MediaUpload/Media";
+import { uploadMedia } from "../Utils/Media";
 import { ImageOutline, CloseCircleOutline } from "react-ionicons";
 import Picker from "emoji-picker-react";
 import { useEffect } from "react";

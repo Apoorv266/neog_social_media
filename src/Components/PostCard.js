@@ -17,6 +17,7 @@ import { userContext } from "../Contexts/UserContext";
 import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { sharePost } from "../Utils/ShareLink";
 
 const PostCard = ({ item }) => {
   const { getUserAvatarImg } = useContext(userContext);
@@ -41,7 +42,7 @@ const PostCard = ({ item }) => {
     return extensionData.includes(extension)
   };
 
-  const handleEditBtn = (id) =>{
+  const handleEditBtn = (id) => {
     handleClickEdit(id)
     seteditpostModal(true)
   }
@@ -85,7 +86,7 @@ const PostCard = ({ item }) => {
                 width="20px"
                 onClick={() => deletePostFunc(item?._id)}
               />
-              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={()=>handleEditBtn(item?._id)} />
+              <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={() => handleEditBtn(item?._id)} />
             </>
           ) : (
             ""
@@ -137,9 +138,13 @@ const PostCard = ({ item }) => {
             onClick={() => dislikePostFunc(item?._id)}
           />
         )}
-        <ChatboxEllipsesOutline color={"white"} height="30px" width="30px" />
 
-        <ShareSocialOutline color={"white"} height="30px" width="30px" />
+        <Link to={`/post/${item?._id}`} style={{ textDecoration: "none" }}>
+          <ChatboxEllipsesOutline color={"white"} height="30px" width="30px" />
+        </Link>
+
+        
+        <ShareSocialOutline color={"white"} height="30px" width="30px" onClick={() => sharePost(item._id)} />
 
         {isPostBookmarked(item?._id) ? (
           <Bookmark

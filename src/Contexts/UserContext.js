@@ -4,13 +4,28 @@ import { useReducer } from 'react'
 import { initialUserData, userReducerFunc } from '../Reducers/UsersReducer'
 import { authContext } from './AuthContext'
 import { useState } from 'react'
+import { ToastError, ToastSuccess } from '../Components/ToastComponent/ToastContainer'
+
+
+const getUserData = () =>{
+  const postState= JSON.parse(localStorage.getItem("userState"))
+  if (postState) {
+    return JSON.parse(localStorage.getItem("userState"))
+  }else{
+    return initialUserData
+  }
+}
+
 
 export const userContext = createContext()
-
 const UserContextWrapper = ({ children }) => {
-  const [userState, userDispatch] = useReducer(userReducerFunc, initialUserData)
+  const [userState, userDispatch] = useReducer(userReducerFunc, getUserData())
   const { userToken,setuserData,setauthLoader } = useContext(authContext)
   const [userSearchField, setuserSearchField] = useState("")
+
+  useEffect(() => {
+    localStorage.setItem("userState", JSON.stringify(userState))
+    }, [userState])
 
   const fetchUsers = async () => {
     try {
@@ -19,16 +34,16 @@ const UserContextWrapper = ({ children }) => {
         userDispatch({ type: "GET_USERS", payload: users })
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
-
-
   }
+  
+  
   useEffect(() => {
     setTimeout(() => {
       fetchUsers()
     }, 1000);
-  }, [])
+  }, [userToken])
 
 
   const followUsers = async (userId) => {
@@ -41,9 +56,10 @@ const UserContextWrapper = ({ children }) => {
       if (status === 200 || status === 201) {
         setuserData(user)
         localStorage.setItem("user", JSON.stringify(user))
+        ToastSuccess("User followed successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
 
   }
@@ -59,9 +75,10 @@ const UserContextWrapper = ({ children }) => {
       if (status === 200 || status === 201) {
         setuserData(user)
         localStorage.setItem("user", JSON.stringify(user))
+        ToastSuccess("User unfollowed successfully !")
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 
@@ -72,7 +89,7 @@ const UserContextWrapper = ({ children }) => {
         userDispatch({ type: "PROFILE_USER", payload: user })
       }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }finally{
       setauthLoader(false)
     }
@@ -92,9 +109,10 @@ const UserContextWrapper = ({ children }) => {
         if (status === 201) {
           setuserData(user)
           localStorage.setItem("user", JSON.stringify(user))
+          ToastSuccess("Details saved successfully !")
         }
     } catch (error) {
-      console.log(error)
+      ToastError("Some error occured !")
     }
   }
 

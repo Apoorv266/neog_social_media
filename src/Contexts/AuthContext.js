@@ -84,14 +84,12 @@ const AuthContextWrapper = ({ children }) => {
         localStorage.removeItem("postState")
         localStorage.removeItem("userState")
         localStorage.clear()
+        setloader(true);
         setTimeout(() => {
-            setloader(true);
+            setloader(false);
             navigate("/login")
         }, 1000);
-        setTimeout(() => {
             ToastSuccess("Logged Out successfully !")
-            setloader(false);
-        }, 1500);
     }
     return (
         <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc, setauthLoader, authLoader, followUserList, setuserData }}>{children}</authContext.Provider>

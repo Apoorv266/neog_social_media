@@ -1,9 +1,13 @@
+import { ToastError } from "../Components/ToastComponent/ToastContainer";
+
 export const uploadMedia = async (media) => {
     const mediaType = media?.type?.split("/")[0];
-    if (mediaType === "video" && Math.round(media?.size / 1024000) > 10)
-        console.log("Video size should be less than 10MB");
-    else if (Math.round(media?.size / 1024000) > 4)
-        console.log("Image size should be less than 4MB");
+    if (mediaType === "video" && Math.round(media?.size / 1024000) > 10){
+        ToastError("Video size should be less than 10MB")
+    }
+    else if (Math.round(media?.size / 1024000) > 4){
+        ToastError("Image size should be less than 4MB")
+    }
     else {
 
         const formData = new FormData();

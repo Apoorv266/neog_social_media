@@ -24,6 +24,7 @@ const Addpost = () => {
       createPostFunc(content, "", "");
     }
     setcontent("");
+    setFilename("");
   };
 
   const handleUploadInput = (e) => {

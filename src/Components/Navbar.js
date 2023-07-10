@@ -3,7 +3,7 @@ import "../Styles/Navbar.css"
 const Navbar = () => {
   return (
     <div className='navbar-wrapper'>
-        <h1>Logo</h1>
+        <h1>ChatMate</h1>
     </div>
   )
 }

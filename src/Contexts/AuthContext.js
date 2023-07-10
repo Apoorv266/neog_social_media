@@ -12,7 +12,7 @@ const AuthContextWrapper = ({ children }) => {
     const [userToken, setuserToken] = useState(storageToken)
     const [loader, setloader] = useState(false)
     const [authLoader, setauthLoader] = useState(false)
-    
+
     const navigate = useNavigate()
     const location = useLocation()
     const followUserList = userData?.following.reduce((acc, curr) => [...acc, curr.username], [])
@@ -38,20 +38,27 @@ const AuthContextWrapper = ({ children }) => {
                     }
                     setloader(false)
                 }, 2000);
-               
+
             }
         } catch (error) {
             ToastError("Some error occured !")
         }
     }
 
-    const signupFunc = async (username, password, fullname) => {
+    const signupFunc = async (firstName, lastName, username, password) => {
         try {
             setloader(true)
+            const avatarUrl = "https://img.freepik.com/premium-vector/young-man-avatar-character-vector-illustration-design_24877-18514.jpg"
+            const backgroundImage = "https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-106439.jpg"
+            const bio = "No bio added"
             const { data: { encodedToken, createdUser }, status } = await axios.post("api/auth/signup", {
+                firstName,
+                lastName,
                 username,
                 password,
-                fullname
+                avatarUrl,
+                backgroundImage,
+                bio
             })
 
             if (status === 200 || status === 201) {
@@ -64,7 +71,7 @@ const AuthContextWrapper = ({ children }) => {
                     navigate("/");
                     setloader(false)
                 }, 1000);
-            
+
             }
         } catch (error) {
             ToastError("Some error occured !")
@@ -74,6 +81,8 @@ const AuthContextWrapper = ({ children }) => {
     const handleLogout = () => {
         setuserToken(null);
         setuserData(null);
+        localStorage.removeItem("postState")
+        localStorage.removeItem("userState")
         localStorage.clear()
         setTimeout(() => {
             setloader(true);
@@ -85,7 +94,7 @@ const AuthContextWrapper = ({ children }) => {
         }, 1500);
     }
     return (
-        <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc, setauthLoader, authLoader, followUserList ,setuserData}}>{children}</authContext.Provider>
+        <authContext.Provider value={{ userToken, loginFunc, userData, handleLogout, loader, signupFunc, setauthLoader, authLoader, followUserList, setuserData }}>{children}</authContext.Provider>
     )
 }
 

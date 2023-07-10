@@ -7,13 +7,14 @@ import { authContext } from "../Contexts/AuthContext";
 const Signup = () => {
     const { signupFunc } = useContext(authContext);
     const [signupInput, setsignupInput] = useState({
-        name : "",
+        firstname : "",
+        lastname: "",
         username: "",
         password: ""
     })
 
     const handleLoginBtn = () => {
-        signupFunc(signupInput.username, signupInput.password,signupInput.name )
+        signupFunc(signupInput.firstname, signupInput.lastname, signupInput.username, signupInput.password,signupInput.name )
     }
 
 
@@ -29,9 +30,12 @@ const Signup = () => {
                 />
             </div>
             <div className="login-details">
-                <h3>FullName:</h3>
-                <input type="text" name="" id="name" value={signupInput.name} onChange={(e) => setsignupInput((state) => ({ ...state, name: e.target.value }))} />
+                <h3>FirstName:</h3>
+                <input type="text" name="firstname" id="name" value={signupInput.firstname} onChange={(e) => setsignupInput((state) => ({ ...state, firstname: e.target.value }))} />
 
+
+                <h3>LastName:</h3>
+                <input type="text" name="lastname"  value={signupInput.lastname} onChange={(e) => setsignupInput((state) => ({ ...state, lastname: e.target.value }))} />
 
                 <h3>Username:</h3>
                 <input type="text" name="" id="username" value={signupInput.username} onChange={(e) => setsignupInput((state) => ({ ...state, username: e.target.value }))} />

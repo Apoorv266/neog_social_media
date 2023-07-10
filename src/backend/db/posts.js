@@ -9,8 +9,8 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: "xhzTkUi2Nt",
-    content: "Nice Weather Today!!",
-    mediaURL: "",
+    content: "Nature is beautiful !!",
+    mediaURL: "https://img.freepik.com/premium-photo/mountains-during-flowers-blossom-sunrise-flowers-mountain-hills-beautiful-natural-landscape-summer-time-mountainimage_647656-1502.jpg",
     mediaAlt :"image1", 
     likes: {
       likeCount: 5,
@@ -21,7 +21,7 @@ export const posts = [
       {
         _id: "okzxcf",
         username: "janedoe",
-        commentData: "I agree!! Feels like we should go for outing. What say?",
+        commentData: "Truly amazing !! Love the click!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -34,9 +34,9 @@ export const posts = [
   },
   {
     _id: "siFFxfYI1s",
-    content: "Started my Baking journey! Look what I made.",
+    content: "Minions are so cute !",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/video/upload/v1652188886/upload-socialmedia/oikev6eomsgahnvxcijd.mp4",
+      "https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/tenor_1.gif",
       mediaAlt :"image2",
     likes: {
       likeCount: 0,
@@ -50,9 +50,9 @@ export const posts = [
   },
   {
     _id: "3XHvLP1fg",
-    content: "I made this cake for my friend's birthday. Check it out",
+    content: "What a mystic creature this is ! 🐯 ",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188492/upload-socialmedia/cakegif_q11mfm.webp",
+      "https://cdn.pixabay.com/photo/2015/06/02/12/11/lion-794962_640.jpg",
       mediaAlt :"image3",
     likes: {
       likeCount: 1,
@@ -63,7 +63,7 @@ export const posts = [
       {
         _id: "6nImWvImxo",
         username: "johndoe",
-        commentData: "That's mouth watering! Could you make one for my Birthday as well?",
+        commentData: "Maintain a safe distance !",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -77,8 +77,8 @@ export const posts = [
   {
     _id: "MTYtVhecCj",
     content:
-      "You are never too old to set another goal or to dream a new dream.",
-    mediaURL: "",
+      "Mario is my all time favourite game !!",
+    mediaURL: "https://media.tenor.com/MbAAcYSyyagAAAAd/super-mario-mario.gif",
     mediaAlt :"",
     likes: {
       likeCount: 5,
@@ -92,9 +92,9 @@ export const posts = [
   },
   {
     _id: "3XHvLP9kC",
-    content: "Yayy! Its my Birthday Today. Made this cake for myself!",
+    content: "Japan is my dream destination !",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014336/ecommerce/chocolatecake4.webp",
+      "https://cdn.pixabay.com/photo/2015/06/29/04/41/tokyo-tower-825196_1280.jpg",
       mediaAlt :"image5",
     likes: {
       likeCount: 2,
@@ -105,7 +105,7 @@ export const posts = [
       {
         _id: "EO7iOPN9n8",
         username: "carlsmith",
-        commentData: "Happy Birthday! Enjoy your Day!!",
+        commentData: "Take me too !",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -114,7 +114,7 @@ export const posts = [
       {
         _id: "QK52wf6HI1",
         username: "janedoe",
-        commentData: "Wow! Looks Amazzing! Happy Birthday!",
+        commentData: "Wow! Looks Amazzing!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -128,7 +128,7 @@ export const posts = [
   {
     _id: "tHaThLyFQh",
     content:
-      "Life has got all those twists and turns. You’ve got to hold on tight and off you go.",
+      "To change tomorrow, you have to change something today !",
     mediaURL: "",
     mediaAlt :"",
     likes: {
@@ -143,7 +143,7 @@ export const posts = [
   },
   {
     _id: "G-Gi3lSZP9",
-    content: "When you have a dream, you’ve got to grab it and never let go.",
+    content: "Anyone up for a movie ? Lets plan together !",
     mediaURL: "",
     mediaAlt :"",
     likes: {
@@ -159,7 +159,7 @@ export const posts = [
   {
     _id: "GeMUAdi9mh",
     content:
-      "No matter what people tell you, words and ideas can change the world.",
+      "Comment where do you live? Iam waiting",
     mediaURL: "",
     mediaAlt :"",
     likes: {
@@ -174,9 +174,9 @@ export const posts = [
   },
   {
     _id: "IyUlYXTrzZ",
-    content: "Who's up for Pineapple Pastry?",
+    content: "I love blueberries ! They are sweet.",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014828/ecommerce/pineapplemuffin1.webp",
+      "https://cdn.pixabay.com/photo/2010/12/13/10/05/berries-2277_1280.jpg",
       mediaAlt :"image6",
     likes: {
       likeCount: 10,
@@ -201,7 +201,7 @@ export const posts = [
   {
     _id: "Ie92xOSVeU",
     content:
-      "Check out this amazing video from BakinZone https://bakinzone.netlify.app/videos/qtlhdIfojmc",
+      "I want to be a youtuber !",
     mediaURL: "",
     mediaAlt :"",
     likes: {

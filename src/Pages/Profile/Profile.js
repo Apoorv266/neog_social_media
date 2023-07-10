@@ -16,6 +16,8 @@ const Profile = () => {
   
     const userProfileData =userData?.username === username  ? userData : userState?.allUsers.find((item) => item.username === username)
 
+    const profileDetails = userData.username === username ?userData : userState?.profileUser
+
 
     useEffect(() => {
         setauthLoader(true)
@@ -36,7 +38,7 @@ const Profile = () => {
         ) : (
           <>
              
-             <UserDetails  userProfileData={userState?.profileUser} postLen = {postState?.userProfilePosts}/>
+             <UserDetails  userProfileData={profileDetails} postLen = {postState?.userProfilePosts}/>
             {postState?.userProfilePosts?.map((item) => {
                 const currPost = postState?.allPosts?.find(({_id}) => _id === item)
               return <PostCard item={currPost} />;

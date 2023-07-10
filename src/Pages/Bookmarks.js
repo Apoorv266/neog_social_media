@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext } from 'react'
-import PostCard from './PostCard'
+import PostCard from '../Components/PostCard'
 import { postContext } from '../Contexts/PostContext'
 
 const Bookmarks = () => {

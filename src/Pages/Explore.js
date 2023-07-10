@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { postContext } from "../Contexts/PostContext";
-import PostCard from "./PostCard";
+import PostCard from "../Components/PostCard";
 
 const Explore = () => {
   const { filterByDate } = useContext(postContext);

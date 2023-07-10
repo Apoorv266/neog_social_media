@@ -6,7 +6,8 @@ import { useContext } from 'react';
 import { authContext } from './Contexts/AuthContext';
 import Loader from './Components/Loader';
 import Signup from './Pages/Signup';
-import Home from './Components/Home';
+import Home from './Pages/Home';
+
 
 
 function App() {

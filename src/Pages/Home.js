@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import Navbar from './Navbar'
-import SideNavbar from './SideNavbar'
+import Navbar from '../Components/Navbar'
+import SideNavbar from '../Components/SideNavbar'
 import { Route, Routes } from 'react-router-dom'
-import RightBar from './RightBar'
+import RightBar from '../Components/RightBar'
 import "../Styles/Home.css"
-import MiddleBar from './MiddleBar'
+import MiddleBar from '../Components/MiddleBar'
 import Explore from './Explore'
 import Bookmarks from './Bookmarks'
-import Profile from './Profile/Profile'
-import SinglePost from './SinglePost';
+import Profile from '../Components/Profile/Profile'
+import SinglePost from '../Components/SinglePost';
 import { ToastContainer } from 'react-toastify'
-import { ToastView } from './ToastComponent/ToastContainer'
+import { ToastView } from '../Components/ToastComponent/ToastContainer'
 
 const Home = () => {
     const [showFilter, setshowFilter] = useState(true)

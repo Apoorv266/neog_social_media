@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Mockman from "mockman-js";
 import Login from './Pages/Login';
 import { useContext } from 'react';
 import { authContext } from './Contexts/AuthContext';
 import Loader from './Components/Loader';
 import Signup from './Pages/Signup';
 import Home from './Pages/Home';
+import PrivateRoute from './Components/PrivateRoute';
 
 
 
@@ -16,10 +16,9 @@ function App() {
     <>
       {loader ? <Loader /> : <div className="App">
         <Routes>
-          <Route path='/*' element={<Home/>} />
+          <Route path='/*' element={<PrivateRoute><Home/></PrivateRoute>} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/mockman' element={<Mockman />} />
         </Routes>
       </div>}
 

@@ -228,12 +228,16 @@ const PostContextWrapper = ({ children }) => {
 
 
   const getUserPostFunc = async (username) => {
+  
     try {
-      const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
+      if (username) {
+        const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
       if (status === 200) {
         const currPostId = posts.map((item) => item._id)
         postDispatch({ type: "ADD_USER_POST", payload: currPostId })
       }
+      }
+      
     } catch (error) {
       ToastError("Some error occured !")
     } finally {

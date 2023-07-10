@@ -7,10 +7,9 @@ import "../Styles/Home.css"
 import MiddleBar from '../Components/MiddleBar'
 import Explore from './Explore'
 import Bookmarks from './Bookmarks'
-import Profile from '../Components/Profile/Profile'
 import SinglePost from '../Components/SinglePost';
-import { ToastContainer } from 'react-toastify'
 import { ToastView } from '../Components/ToastComponent/ToastContainer'
+import Profile from './Profile/Profile'
 
 const Home = () => {
     const [showFilter, setshowFilter] = useState(true)

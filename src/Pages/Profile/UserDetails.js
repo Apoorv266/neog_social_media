@@ -3,9 +3,10 @@ import "../../Styles/UserDetails.css";
 import { useContext } from "react";
 import { authContext } from "../../Contexts/AuthContext";
 import { userContext } from "../../Contexts/UserContext";
-import Modal from "../Modal/FollowListModal/Modal";
 import { useState } from "react";
-import EditProfileModal from "../Modal/EditProfileModal/EditProfileModal";
+import EditProfileModal from "../../Components/Modal/EditProfileModal/EditProfileModal";
+import Modal from "../../Components/Modal/FollowListModal/Modal";
+
 
 const UserDetails = ({ userProfileData, postLen }) => {
   const { followers, following, bio, firstName, lastName, username, website, createdAt, avatarUrl, _id, backgroundImage } = userProfileData

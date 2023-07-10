@@ -1,12 +1,12 @@
 import React from 'react'
 import { useContext } from 'react';
 import { postContext } from '../../Contexts/PostContext';
-import PostCard from '../PostCard';
 import UserDetails from './UserDetails';
 import { useParams } from 'react-router-dom';
 import { userContext } from '../../Contexts/UserContext';
 import { useEffect } from 'react';
 import { authContext } from '../../Contexts/AuthContext';
+import PostCard from '../../Components/PostCard';
 
 const Profile = () => {
     const {username} = useParams()

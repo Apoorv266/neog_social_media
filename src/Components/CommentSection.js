@@ -20,7 +20,7 @@ const CommentSection = ({comments, postId}) => {
         <input type="text" onChange={(e)=>setcommentField(e.target.value)} value={commentField}/>
         <button onClick={handleCommentBtn}>Post comment</button>
       </div>
-      {comments.map((item) =>{
+      {comments?.map((item) =>{
       return (
 <div className="comments-list" key={item._id}>
         <div className="comment-user-details">

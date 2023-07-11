@@ -15,7 +15,7 @@ const AuthContextWrapper = ({ children }) => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const followUserList = userData?.following.reduce((acc, curr) => [...acc, curr.username], [])
+    const followUserList = userData?.following?.reduce((acc, curr) => [...acc, curr.username], [])
 
     const loginFunc = async (username, password) => {
         try {

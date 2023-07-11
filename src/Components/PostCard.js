@@ -18,6 +18,7 @@ import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { sharePost } from "../Utils/ShareLink";
+import EditPostModal from "./Modal/EditPostModal/EditPostModal";
 
 const PostCard = ({ item , fromBookmarks, fromsinglePost}) => {
   const { getUserAvatarImg } = useContext(userContext);
@@ -34,7 +35,8 @@ const PostCard = ({ item , fromBookmarks, fromsinglePost}) => {
     removebookmarkFunc,
     isPostBookmarked,
     seteditpostModal,
-    handleClickEdit
+    handleClickEdit,
+    editpostModal
   } = useContext(postContext);
 
 
@@ -170,6 +172,7 @@ const PostCard = ({ item , fromBookmarks, fromsinglePost}) => {
           />
         )}
       </div>
+      {editpostModal && <EditPostModal />}
     </div>
   );
 };

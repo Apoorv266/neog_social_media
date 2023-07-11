@@ -41,7 +41,6 @@ const Profile = () => {
           </div>
         ) : (
           <>
-             
              <UserDetails  userProfileData={profileDetails} postLen = {postState?.userProfilePosts}/>
             {postState?.userProfilePosts.length > 0 ?postState?.userProfilePosts?.map((postId) => {
                 const currPost = postState?.allPosts?.find(({_id}) => _id === postId)

@@ -4,19 +4,18 @@ import PostCard from "./PostCard";
 import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
 import Addpost from "./Addpost";
-import EditPostModal from "./Modal/EditPostModal/EditPostModal";
 
 const MiddleBar = () => {
-  const {filterByDate, editpostModal} = useContext(postContext);
-  const { authLoader,followUserList, userData } = useContext(authContext);
+  const { filterByDate } = useContext(postContext);
+  const { authLoader, followUserList, userData } = useContext(authContext);
   const dispPost = filterByDate?.filter((item) => followUserList?.includes(item.username) || item.username === userData?.username).reverse()
   return (
     <>
       <div className="post-container">
-       <Addpost/>
+        <Addpost />
         {authLoader ? (
           <div className="loader-img-main">
-            <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"}/>
+            <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"} />
           </div>
         ) : (
           <>
@@ -26,7 +25,7 @@ const MiddleBar = () => {
           </>
         )}
       </div>
-{editpostModal && <EditPostModal/>}
+      
     </>
   );
 };

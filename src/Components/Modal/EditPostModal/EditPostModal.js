@@ -44,6 +44,7 @@ const EditPostModal = () => {
       document.removeEventListener("mousedown", handler);
     };
   });
+  
   return (
     <div id="myModal" className="modal">
 

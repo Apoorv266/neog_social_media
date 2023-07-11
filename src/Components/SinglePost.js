@@ -20,7 +20,7 @@ const SinglePost = () => {
       }, [])
   return (
     <div className="post-container">
-    <PostCard item={postObj}/>
+    <PostCard item={postObj} fromsinglePost/>
     <CommentSection comments={comments} postId={ _id}/>
     </div>
   )

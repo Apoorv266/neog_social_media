@@ -13,17 +13,21 @@ const Profile = () => {
     const { postState , getUserPostFunc} = useContext(postContext);
     const {userState, getUserDetailsFunc} = useContext(userContext);
     const {userData, authLoader, setauthLoader} = useContext(authContext)
-  
-    const userProfileData =userData?.username === username  ? userData : userState?.allUsers.find((item) => item.username === username)
-
+    
     const profileDetails = userData.username === username ?userData : userState?.profileUser
+
+    const userProfileObj =userData?.username === username  ? userData : userState?.allUsers.find((item) => item.username === username)
+
 
 
     useEffect(() => {
         setauthLoader(true)
         setTimeout(() => {
-            getUserDetailsFunc(userProfileData._id)
-            getUserPostFunc(userProfileData.username)
+          // function will return profile user details
+            getUserDetailsFunc(userProfileObj._id)
+            
+            // function will return profile user posts
+            getUserPostFunc(userProfileObj.username)
         }, 500);
     }, [userData, username])
  

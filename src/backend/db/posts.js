@@ -79,7 +79,7 @@ export const posts = [
     content:
       "Mario is my all time favourite game !!",
     mediaURL: "https://media.tenor.com/MbAAcYSyyagAAAAd/super-mario-mario.gif",
-    mediaAlt :"",
+    mediaAlt :"marioImage",
     likes: {
       likeCount: 5,
       likedBy: [],
@@ -95,7 +95,7 @@ export const posts = [
     content:
     "Comment where do you live? Iam waiting",
   mediaURL: "",
-      mediaAlt :"image5",
+      mediaAlt :"",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -146,7 +146,7 @@ export const posts = [
     content: "Japan is my dream destination !",
     mediaURL:
       "https://cdn.pixabay.com/photo/2015/06/29/04/41/tokyo-tower-825196_1280.jpg",
-    mediaAlt :"",
+    mediaAlt :"japan.jpg",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -161,7 +161,7 @@ export const posts = [
     _id: "GeMUAdi9mh",
     content: "Anyone up for a movie ? Lets plan together !",
     mediaURL: "https://media.tenor.com/OlmWTIz9-skAAAAC/movie-night.gif",
-    mediaAlt :"",
+    mediaAlt :"movie.gif",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -353,7 +353,7 @@ export const posts = [
     content:
       "I learned a long time ago that there is something worse than missing the goal, and that’s not pulling the trigger.",
     mediaURL: "",
-    mediaAlt :"Image7",
+    mediaAlt :"",
     likes: {
       likeCount: 9,
       likedBy: [],

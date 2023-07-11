@@ -16,11 +16,13 @@ import { useContext } from "react";
 import { userContext } from "../Contexts/UserContext";
 import { postContext } from "../Contexts/PostContext";
 import { authContext } from "../Contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { sharePost } from "../Utils/ShareLink";
 
-const PostCard = ({ item , fromBookmarks}) => {
+const PostCard = ({ item , fromBookmarks, fromsinglePost}) => {
   const { getUserAvatarImg } = useContext(userContext);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { userData } = useContext(authContext);
   const {
     isPostLiked,
@@ -84,7 +86,12 @@ const PostCard = ({ item , fromBookmarks}) => {
                 color={"#ffffff"}
                 height="20px"
                 width="20px"
-                onClick={() => deletePostFunc(item?._id)}
+                onClick={() =>{
+                  deletePostFunc(item?._id)
+                  if (pathname !== "/" && fromsinglePost) {
+                    navigate("/");
+                  }
+                } }
               />
               <PencilOutline color={"#ffffff"} height="20px" width="20px" onClick={() => handleEditBtn(item?._id)} />
             </>

@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import "../Styles/Login.css"
 import { Link } from "react-router-dom";
 import { authContext } from "../Contexts/AuthContext";
+import { ToastError, ToastView } from "../Components/ToastComponent/ToastContainer";
 
 
 const Signup = () => {
@@ -12,11 +13,20 @@ const Signup = () => {
         username: "",
         password: ""
     })
-
+    
+    const isFieldEmpty = () => {
+      return Object.values(signupInput).includes("")
+    }
     const handleLoginBtn = () => {
-        signupFunc(signupInput.firstname, signupInput.lastname, signupInput.username, signupInput.password,signupInput.name )
+        if (isFieldEmpty()) {
+            ToastError("One or more field is blank !")
+          } else {
+            signupFunc(signupInput.firstname, signupInput.lastname, signupInput.username, signupInput.password,signupInput.name )
+          }
     }
 
+
+    
 
     return (
         <div className="login-container">
@@ -47,6 +57,7 @@ const Signup = () => {
                 <p>Already have an acount? <Link className="auth-link" to={"/login"}> Login Here
                 </Link></p>
             </div>
+            <ToastView />
         </div>
     );
 };

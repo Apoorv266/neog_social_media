@@ -137,24 +137,21 @@ const PostContextWrapper = ({ children }) => {
 
 
   const deletePostFunc = async (postId) => {
-  
     try {
       const {
         status,
         data: { posts },
-      } = await axios.delete(`api/posts/${postId}`, {
+      } = await axios.delete(`/api/posts/${postId}`, {
         headers: { authorization: userToken },
       })
 
       if (status === 201) {
-        // const userArr = postState.userProfilePosts.filter(item => item._id !== postId)
-        // postDispatch({ type: "ADD_USER_POST", payload: userArr })
-       
+        const userArr = postState.userProfilePosts.filter(item => item !== postId)
+        postDispatch({ type: "ADD_USER_POST", payload: userArr })
         postDispatch({ type: "DELETE_POST", payload: posts })
         ToastSuccess("Post deleted successfully !")
       }
     } catch (error) {
-    )
       ToastError("Some error occured !")
     }
   }
@@ -238,7 +235,6 @@ const PostContextWrapper = ({ children }) => {
       if (username) {
         const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
       if (status === 200) {
-     
         const currPostId = posts.map((item) => item._id)
         postDispatch({ type: "ADD_USER_POST", payload: currPostId })
       }

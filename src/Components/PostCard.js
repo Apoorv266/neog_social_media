@@ -19,7 +19,7 @@ import { authContext } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { sharePost } from "../Utils/ShareLink";
 
-const PostCard = ({ item }) => {
+const PostCard = ({ item , fromBookmarks}) => {
   const { getUserAvatarImg } = useContext(userContext);
   const { userData } = useContext(authContext);
   const {
@@ -77,7 +77,7 @@ const PostCard = ({ item }) => {
           </div>
         </div>
 
-        <div className="utils-icons">
+        {!fromBookmarks && <div className="utils-icons">
           {userData?.username === item?.username ? (
             <>
               <TrashOutline
@@ -91,7 +91,7 @@ const PostCard = ({ item }) => {
           ) : (
             ""
           )}
-        </div>
+        </div>}
       </div>
 
         <Link to={`/post/${item?._id}`} style={{ textDecoration: "none" }}>

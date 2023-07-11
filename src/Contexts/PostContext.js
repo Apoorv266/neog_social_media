@@ -137,8 +137,9 @@ const PostContextWrapper = ({ children }) => {
 
 
   const deletePostFunc = async (postId) => {
+   
     try {
-      const {
+      const {    
         status,
         data: { posts },
       } = await axios.delete(`api/posts/${postId}`, {
@@ -150,6 +151,7 @@ const PostContextWrapper = ({ children }) => {
         ToastSuccess("Post deleted successfully !")
       }
     } catch (error) {
+    
       ToastError("Some error occured !")
     }
   }

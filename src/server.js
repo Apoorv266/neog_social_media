@@ -77,11 +77,11 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/posts/user/:username", getAllUserPostsHandler.bind(this));
 
       // post routes (private)
-      // not done
+      //  done
       this.post("/posts", createPostHandler.bind(this));
       // done
       this.delete("/posts/:postId", deletePostHandler.bind(this));
-      // not done
+      //  done
       this.post("/posts/edit/:postId", editPostHandler.bind(this));
       // done
       this.post("/posts/like/:postId", likePostHandler.bind(this));
@@ -95,7 +95,7 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/users/:userId", getUserHandler.bind(this));
 
       // user routes (private)
-      // not done
+      //  done
       this.post("users/edit", editUserHandler.bind(this));
       // done
       this.get("/users/bookmark", getBookmarkPostsHandler.bind(this));
@@ -121,6 +121,8 @@ export function makeServer({ environment = "development" } = {}) {
 
 
       //post comments routes (private)
+
+            // done
       this.post("/comments/add/:postId", addPostCommentHandler.bind(this));
       this.post(
         "/comments/edit/:postId/:commentId",

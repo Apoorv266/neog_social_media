@@ -7,11 +7,11 @@ import { useState } from 'react'
 import { ToastError, ToastSuccess } from '../Components/ToastComponent/ToastContainer'
 
 
-const getUserData = () =>{
-  const postState= JSON.parse(localStorage.getItem("userState"))
+const getUserData = () => {
+  const postState = JSON.parse(localStorage.getItem("userState"))
   if (postState) {
     return JSON.parse(localStorage.getItem("userState"))
-  }else{
+  } else {
     return initialUserData
   }
 }
@@ -20,12 +20,13 @@ const getUserData = () =>{
 export const userContext = createContext()
 const UserContextWrapper = ({ children }) => {
   const [userState, userDispatch] = useReducer(userReducerFunc, getUserData())
-  const { userToken,setuserData,setauthLoader } = useContext(authContext)
+  const { userToken, setuserData, setauthLoader } = useContext(authContext)
   const [userSearchField, setuserSearchField] = useState("")
+  const [searchedUser, setsearchedUser] = useState(userState.allUsers)
 
   useEffect(() => {
     localStorage.setItem("userState", JSON.stringify(userState))
-    }, [userState])
+  }, [userState])
 
   const fetchUsers = async () => {
     try {
@@ -37,8 +38,8 @@ const UserContextWrapper = ({ children }) => {
       ToastError("Some error occured !")
     }
   }
-  
-  
+
+
   useEffect(() => {
     setTimeout(() => {
       fetchUsers()
@@ -48,10 +49,10 @@ const UserContextWrapper = ({ children }) => {
 
   const followUsers = async (userId) => {
     try {
-      const {status , data : {user}} = await axios.post(
+      const { status, data: { user } } = await axios.post(
         `/api/users/follow/${userId}`,
         {},
-        { headers: { authorization:userToken } }
+        { headers: { authorization: userToken } }
       );
       if (status === 200 || status === 201) {
         setuserData(user)
@@ -65,12 +66,12 @@ const UserContextWrapper = ({ children }) => {
   }
 
 
-  const unFollowFunc = async (userId) =>{
+  const unFollowFunc = async (userId) => {
     try {
-      const {status , data : {user}} = await axios.post(
+      const { status, data: { user } } = await axios.post(
         `/api/users/unfollow/${userId}`,
         {},
-        { headers: { authorization:userToken } }
+        { headers: { authorization: userToken } }
       );
       if (status === 200 || status === 201) {
         setuserData(user)
@@ -82,54 +83,61 @@ const UserContextWrapper = ({ children }) => {
     }
   }
 
-  const getUserDetailsFunc = async (userId) =>{
+  const getUserDetailsFunc = async (userId) => {
     try {
-      const {status , data : {user}} = await axios.get(`/api/users/${userId}`)
+      const { status, data: { user } } = await axios.get(`/api/users/${userId}`)
       if (status === 200) {
         userDispatch({ type: "PROFILE_USER", payload: user })
       }
     } catch (error) {
       ToastError("Some error occured !")
-    }finally{
+    } finally {
       setauthLoader(false)
     }
   }
 
-  const handleEditUserFunc  = async (editInputField) =>{
+  const handleEditUserFunc = async (editInputField) => {
     try {
-      const {firstName, lastName, bio, website, backgroundImage, avatarUrl} = editInputField
+      const { firstName, lastName, bio, website, backgroundImage, avatarUrl } = editInputField
       const {
         status,
         data: { user },
-      }  =  await axios.post(
+      } = await axios.post(
         "/api/users/edit",
-        { userData: {firstName,lastName, bio, website,backgroundImage,  avatarUrl } },
+        { userData: { firstName, lastName, bio, website, backgroundImage, avatarUrl } },
         { headers: { authorization: userToken } })
-    
-        if (status === 201) {
-          setuserData(user)
-          localStorage.setItem("user", JSON.stringify(user))
-          ToastSuccess("Details saved successfully !")
-        }
+
+      if (status === 201) {
+        setuserData(user)
+        localStorage.setItem("user", JSON.stringify(user))
+        ToastSuccess("Details saved successfully !")
+      }
     } catch (error) {
       ToastError("Some error occured !")
     }
   }
 
-  const getUserAvatarImg = (currUserName) =>{
+  const getUserAvatarImg = (currUserName) => {
     const obj = userState?.allUsers.find((item) => item.username === currUserName)
     return obj?.avatarUrl
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      filterUserFunc()
+    }, 800);
 
+    return () => clearTimeout(timer)
+  }, [userSearchField])
 
-  const filterUserFunc = () =>{
-    const filterUser = userSearchField ? userState.allUsers.filter((item) => item.username.toLowerCase().includes(userSearchField.toLowerCase())) :userState.allUsers
-    return filterUser
+  const filterUserFunc = () => {
+    const filterUser = userSearchField ? userState.allUsers.filter((item) => item.username.toLowerCase().includes(userSearchField.toLowerCase())) : userState.allUsers
+    setsearchedUser(filterUser)
   }
 
+
   return (
-    <userContext.Provider value={{ userState,unFollowFunc , followUsers, getUserAvatarImg , getUserDetailsFunc,userSearchField , setuserSearchField, filterUserFunc, handleEditUserFunc }}>{children}</userContext.Provider>
+    <userContext.Provider value={{ userState, unFollowFunc, followUsers, getUserAvatarImg, getUserDetailsFunc, userSearchField, setuserSearchField, searchedUser, handleEditUserFunc }}>{children}</userContext.Provider>
   )
 }
 

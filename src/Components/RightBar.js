@@ -7,13 +7,13 @@ import { authContext } from '../Contexts/AuthContext'
 import { postContext } from '../Contexts/PostContext'
 
 const RightBar = ({showFilter}) => {
-  const {  setuserSearchField, userSearchField, filterUserFunc } = useContext(userContext);
+  const {  setuserSearchField, userSearchField, searchedUser } = useContext(userContext);
   const { authLoader, userData, followUserList } = useContext(authContext);
   const { postDispatch, postState } = useContext(postContext)
 
   const { filterBytrending, filterByDate } = postState
 
-  const suggUserList = filterUserFunc()?.filter((item) => item.username !== userData?.username && !followUserList?.includes(item.username))
+  const suggUserList = searchedUser?.filter((item) => item.username !== userData?.username && !followUserList?.includes(item.username))
   return (
     <div className='rightbar-main'>
       <input type="text" name="" id="search-input" placeholder='search for users !' value={userSearchField} onChange={(e)=>setuserSearchField(e.target.value)}/>
@@ -29,12 +29,12 @@ const RightBar = ({showFilter}) => {
     
       {authLoader ? <div className="loader-img-main">
         <img src={require("../Images/loader2.gif")} alt="" srcset="" width={"50px"} />
-      </div> : suggUserList.length > 0 && <div className='sug-users-main'>
+      </div> : suggUserList.length > 0 ? <div className='sug-users-main'>
         <h3>Suggested Users</h3>
         {suggUserList.map((item) => {
           return <SuggUserCard item={item} key={item._id} />
         })}
-      </div>}
+      </div> : <h3 className="empty-txt">No user matches !</h3>}
     </div>
   )
 }

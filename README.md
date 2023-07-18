@@ -2,6 +2,7 @@
 
 ## Features
 - Login/signup
+- Infinite scroll
 - upload gif/video/images
 - follow users
 - unfollow users

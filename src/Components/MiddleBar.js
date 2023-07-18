@@ -6,9 +6,11 @@ import { authContext } from "../Contexts/AuthContext";
 import Addpost from "./Addpost";
 
 const MiddleBar = () => {
-  const { filterByDate } = useContext(postContext);
+  const { filterByDate} = useContext(postContext);
   const { authLoader, followUserList, userData } = useContext(authContext);
   const dispPost = filterByDate?.filter((item) => followUserList?.includes(item.username) || item.username === userData?.username).reverse()
+
+
   return (
     <>
       <div className="post-container">
@@ -25,9 +27,8 @@ const MiddleBar = () => {
           </>
         )}
       </div>
-      
     </>
-  );
+  )
 };
 
 export default MiddleBar;

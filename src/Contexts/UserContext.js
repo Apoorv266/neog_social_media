@@ -122,18 +122,18 @@ const UserContextWrapper = ({ children }) => {
     return obj?.avatarUrl
   }
 
+  const filterUserFunc = () => {
+    const filterUser = userSearchField ? userState.allUsers.filter((item) => item.username.toLowerCase().includes(userSearchField.toLowerCase())) :  userState.allUsers
+    setsearchedUser(filterUser)
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       filterUserFunc()
     }, 800);
 
     return () => clearTimeout(timer)
-  }, [userSearchField])
-
-  const filterUserFunc = () => {
-    const filterUser = userSearchField ? userState.allUsers.filter((item) => item.username.toLowerCase().includes(userSearchField.toLowerCase())) : userState.allUsers
-    setsearchedUser(filterUser)
-  }
+  }, [userSearchField, userState.allUsers])
 
 
   return (

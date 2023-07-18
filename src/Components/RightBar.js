@@ -14,6 +14,8 @@ const RightBar = ({showFilter}) => {
   const { filterBytrending, filterByDate } = postState
 
   const suggUserList = searchedUser?.filter((item) => item.username !== userData?.username && !followUserList?.includes(item.username))
+
+  // console.log("suggUserList", suggUserList)
   return (
     <div className='rightbar-main'>
       <input type="text" name="" id="search-input" placeholder='search for users !' value={userSearchField} onChange={(e)=>setuserSearchField(e.target.value)}/>

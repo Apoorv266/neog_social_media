@@ -14,11 +14,10 @@ const Profile = () => {
     const {userState, getUserDetailsFunc} = useContext(userContext);
     const {userData, authLoader, setauthLoader} = useContext(authContext)
     
-    const profileDetails = userData.username === username ?userData : userState?.profileUser
-
+    // to fetch the id of profile user using "username" params to get user details and posts through api
     const userProfileObj =userData?.username === username  ? userData : userState?.allUsers.find((item) => item.username === username)
 
-
+    const profileDetails = userData.username === username ?userData : userState?.profileUser
 
     useEffect(() => {
         setauthLoader(true)

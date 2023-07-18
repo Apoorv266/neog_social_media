@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, createContext, useState } from 'react'
+import React, { useEffect, createContext, useState, useRef } from 'react'
 import { useContext } from 'react'
 import { authContext } from './AuthContext'
 import { useReducer } from 'react'
@@ -20,24 +20,55 @@ const PostContextWrapper = ({ children }) => {
   const { setauthLoader, userToken } = useContext(authContext)
   const [postState, postDispatch] = useReducer(postReducerFunc, getPostData())
   const [editpostModal, seteditpostModal] = useState(false)
+  const [hasMore, sethasMore] = useState(true)
+  const [page, setpage] = useState(1)
+
+  const elementRef = useRef(null)
 
   useEffect(() => {
-  localStorage.setItem("postState", JSON.stringify(postState))
-  }, [postState])
-  
+    localStorage.setItem("postState", JSON.stringify(postState))
+    }, [postState])
+
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          setpage(state => state + 1);
+        }
+      },
+      { threshold: 0 }
+    );
+    if (observer && elementRef.current) {
+      observer.observe(elementRef.current)
+    }
+    return () => {
+      if (observer) {
+        observer.disconnect()
+      }
+    }
+  }, [postState.allPosts, page])
+
+  useEffect(() => {
+    if (page === 6) {
+      sethasMore(false)
+    }
+  }, [page]);
+
   const fetchPosts = async () => {
     try {
       const { data: { posts }, status } = await axios.get("api/posts")
       if (status === 200) {
         postDispatch({ type: "GET_POST", payload: posts })
+        setauthLoader(false)
       }
     } catch (error) {
       console.log(error)
     } finally {
       setauthLoader(false)
     }
-
   }
+
 
   const getbookMarkPosts = async () => {
     try {
@@ -54,15 +85,13 @@ const PostContextWrapper = ({ children }) => {
 
   }
   useEffect(() => {
-    setauthLoader(true)
-      setTimeout(() => {
-        fetchPosts()
-        if (userToken) {
-          getbookMarkPosts()
-        }
-      }, 1000);
-  }, [userToken])
+    window.scrollTo(0, 0);
+    fetchPosts();
+    if (userToken) {
+      getbookMarkPosts()
+    }
 
+  }, [])
 
   const createPostFunc = async (content, mediaURL, mediaAlt) => {
     try {
@@ -230,16 +259,16 @@ const PostContextWrapper = ({ children }) => {
 
 
   const getUserPostFunc = async (username) => {
-  
+
     try {
       if (username) {
         const { status, data: { posts } } = await axios.get(`/api/posts/user/${username}`)
-      if (status === 200) {
-        const currPostId = posts.map((item) => item._id)
-        postDispatch({ type: "ADD_USER_POST", payload: currPostId })
+        if (status === 200) {
+          const currPostId = posts.map((item) => item._id)
+          postDispatch({ type: "ADD_USER_POST", payload: currPostId })
+        }
       }
-      }
-      
+
     } catch (error) {
       ToastError("Some error occured !")
     } finally {
@@ -250,8 +279,8 @@ const PostContextWrapper = ({ children }) => {
   const editPostFunc = async (postId, content, mediaURL, mediaAlt) => {
     try {
       const { status, data: { posts } } = await axios.post(`/api/posts/edit/${postId}`,
-      { postData: { content, mediaURL, mediaAlt } },
-      { headers: { authorization: userToken } })
+        { postData: { content, mediaURL, mediaAlt } },
+        { headers: { authorization: userToken } })
       if (status === 201) {
         postDispatch({ type: "EDIT_POST", payload: posts });
         ToastSuccess("Post updated successfully !")
@@ -261,10 +290,9 @@ const PostContextWrapper = ({ children }) => {
     }
   }
 
- 
 
   const handleClickEdit = (postId) => {
-    const { content, mediaAlt , mediaURL} = postState.allPosts.find((item) => item._id === postId)
+    const { content, mediaAlt, mediaURL } = postState.allPosts.find((item) => item._id === postId)
     const obj = { content: content, fileTitle: mediaAlt, id: postId, media: null, fileUrl: mediaURL }
     postDispatch({ type: "POST_CONTENT", payload: obj })
   }
@@ -284,7 +312,7 @@ const PostContextWrapper = ({ children }) => {
   const filterByDate = postState.filterByDate ? [...filterTrending].sort((a, b) => new Date(b.createdAt.slice(0, 10)) - new Date(a.createdAt.slice(0, 10))) : filterTrending
 
   return (
-    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal, seteditpostModal, handleClickEdit, editPostFunc }}>{children}</postContext.Provider>
+    <postContext.Provider value={{ postState, postDispatch, filterByDate, likePostFunc, isPostLiked, dislikePostFunc, isPostDisliked, deletePostFunc, bookmarkFunc, removebookmarkFunc, isPostBookmarked, addCommentFunc, deleteCommentFunc, getUserPostFunc, createPostFunc, editpostModal, seteditpostModal, handleClickEdit, editPostFunc, hasMore, elementRef, page, fetchPosts, setpage, sethasMore }}>{children}</postContext.Provider>
   )
 }
 

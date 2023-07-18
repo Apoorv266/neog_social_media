@@ -11,13 +11,15 @@ import SinglePost from '../Components/SinglePost';
 import { ToastView } from '../Components/ToastComponent/ToastContainer'
 import Profile from './Profile/Profile'
 
+
 const Home = () => {
     const [showFilter, setshowFilter] = useState(true)
+
     return (
         <>
             <Navbar />
             <div className='home-main'>
-                <SideNavbar setshowFilter={setshowFilter}/>
+                <SideNavbar setshowFilter={setshowFilter} />
                 <Routes>
                     <Route path='/*' element={<MiddleBar />} />
                     <Route path='/explore' element={<Explore />} />
@@ -25,7 +27,7 @@ const Home = () => {
                     <Route path='/profile/:username' element={<Profile />} />
                     <Route path="/post/:postId" element={<SinglePost />} />
                 </Routes>
-                <RightBar showFilter={showFilter}/>
+                <RightBar showFilter={showFilter} />
                 <ToastView />
             </div>
         </>

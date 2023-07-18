@@ -47,8 +47,8 @@ const UserDetails = ({ userProfileData, postLen }) => {
         <div className="login-user-details">
           <p><strong>Name : </strong>{`${firstName} ${lastName}`}</p>
           <p><strong>Username : </strong>@{`${username}`}</p>
-          <p><strong>Bio : </strong>{bio}</p>
-          <p><strong>Site : </strong><a href={website} target="_blank">{website}</a></p>
+          {bio && <p><strong>Bio : </strong>{bio}</p>}
+          {website && <p><strong>Site : </strong><a href={website} target="_blank">{website}</a></p>}
           <p><strong>Joined on :</strong> {createdAt?.slice(0, 10)}</p>
         </div>
         {userData.username === username ? <button className="edt-profile-btn" onClick={()=>seteditModal(true)}>Edit profile</button> : isUserFollowed(username) ? <button className="edt-profile-btn" onClick={() => unFollowFunc(_id)}>Unfollow</button> : <button className="edt-profile-btn" onClick={() => followUsers(_id)}>Follow</button>}

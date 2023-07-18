@@ -63,15 +63,13 @@ const AuthContextWrapper = ({ children }) => {
         try {
             const avatarUrl = "https://img.freepik.com/premium-vector/young-man-avatar-character-vector-illustration-design_24877-18514.jpg"
             const backgroundImage = "https://img.freepik.com/free-vector/watercolor-oil-painting-background_52683-106439.jpg"
-            const bio = "No bio added"
             const { data: { encodedToken, createdUser }, status } = await axios.post("api/auth/signup", {
                 firstName,
                 lastName,
                 username,
                 password,
                 avatarUrl,
-                backgroundImage,
-                bio
+                backgroundImage
             })
 
             if (status === 200 || status === 201) {
